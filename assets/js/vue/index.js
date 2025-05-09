@@ -1,3 +1,4 @@
+
 const GRAPHQL_ENDPOINT = AUTH_URL;
 
 // async function fetchGraphQL(query, variables = {}) {
@@ -55,19 +56,7 @@ createApp({
         };
 
         const getItems = async () => {
-            const query = `
-                query FindAllUsers {
-                    findAllUsers {
-                        id
-                        status
-                        username
-                        email
-                        telephone
-                        password
-                        role
-                    }
-                }
-            `;
+            const query = FindAllUsersQuery;
 
             try {
                 const data = await fetchGraphQL(query);
@@ -79,25 +68,11 @@ createApp({
         };
 
         const getSliders = async () => {
-            const query = `
-                query FindAllSliders {
-                    findAllSliders {
-                        id
-                        status
-                        name
-                        description
-                        duration
-                        video_quality
-                        image_link
-                        background_link
-                        video_link
-                    }
-                }
-            `;
+            const query = FindAllActiveSlidersQuery;
 
             try {
                 const data = await fetchGraphQL(query);
-                sliders.value = data.data.findAllSliders; // Store API response in sliders array    
+                sliders.value = data.data.findAllActiveSliders; // Store API response in active sliders array                
                 console.log("GraphQL Response Sliders:", data);                    
             } catch (error) {
                 console.error("GraphQL Error:", error);
@@ -118,6 +93,7 @@ createApp({
             getCopyright,
             getItems,
             users,
+            sliders
         };
     }
 }).mount('#appVue');

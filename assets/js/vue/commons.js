@@ -66,3 +66,15 @@ async function getCountryFromLatLng(key, lat, lng) {
     
     return country?.long_name;
 }
+
+async function getCountryName(link){
+  fetch(link)
+  .then(response => response.json())
+  .then(data => {
+      const value = localStorage.getItem("country_name");
+      if (value === null) {
+          localStorage.setItem("country_name",data.country_name);
+      }
+  })
+  .catch(error => console.error("Error fetching location:", error));
+}

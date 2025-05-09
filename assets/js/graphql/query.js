@@ -11,3 +11,23 @@ query FindAllUsers {
     }
 }
 `;
+
+const FindAllActiveSlidersQuery = `
+query FindAllActiveSliders {
+    findAllActiveSliders {
+        id
+        status
+        name
+        description
+        duration
+        video_quality
+        image_link
+        background_link
+        video_link
+        video {
+            status
+            id
+        }
+    }
+}
+`;
