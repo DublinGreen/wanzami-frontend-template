@@ -5,8 +5,10 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Wanzami</title>
-        <meta name="robots" content="noindex, follow">
-        <meta name="description" content="">
+        <title>Wanzami Home</title>
+        <meta name="description" content="Built for storytellers. Powered by community. Designed for the world. Wanzami is a bold pay-per-view streaming platform redefining access and monetisation for African filmmakers. No subscriptions. No gatekeepers. Just original stories—available on demand and on your terms. Born from the need to disrupt outdated systems that limit creative and financial freedom, Wanzami offers a fresh, user-friendly ecosystem where creators are empowered and audiences are in control. Filmmakers earn from day one, and viewers only pay for what they choose to watch.">
+        <meta name="keywords" content="Wanzami, wanzami home, wanzami entertainment, wanzami app, wanzami streaming app, african movies">
+
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
          <!-- Favicon -->
@@ -29,7 +31,7 @@
                         <div class="swiper-wrapper">
                             <div class="home-two-slider position-relative swiper-slide" v-for="slider in sliders" :key="slider.id">
                                 <div class="home-two-slider position-relative swiper-slide">
-                                    <video class="fixed-video-autoplay d-lg-block d-none" :src="slider.video_link" preload="auto" muted autoplay loop></video>
+                                    <video class="fixed-video-autoplay d-lg-block d-none" :src="slider.video.video_short_url" preload="auto" muted autoplay loop></video>
                                     <div class="thumb">
                                         <img src="assets/images/hero/home_two-hero-bg.webp" alt="banner-video" class="w-100">
                                     </div>
@@ -42,12 +44,12 @@
                                                 <div class="content">
                                                     <h1 class="banner-title text-uppercase mb-4">{{slider.name}}</h1>
                                                     <ul class="movie-info-list d-flex align-item-center justify-content-start gap-1 gap-lg-2">
-                                                        <!-- <li class="movie-info-list--item style-two radius-100">
+                                                        <li class="movie-info-list--item style-two radius-100">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M8.00004 12.4493L3.05574 15.2169L4.16001 9.65938L0 5.81235L5.62676 5.14521L8.00004 0L10.3733 5.14521L16 5.81235L11.8401 9.65938L12.9443 15.2169L8.00004 12.4493Z" fill="currentColor"/>
                                                             </svg>
-                                                            <span>8.2 Reviews</span>
-                                                        </li> -->
+                                                            <span>{{slider.video.reviews_rating}}</span>
+                                                        </li>
                                                         <li class="movie-info-list--item style-two radius-100">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                                                                 <path d="M7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 11.6421 11.6421 15 7.5 15ZM8.25 7.5V3.75H6.75V9H11.25V7.5H8.25Z" fill="currentColor"/>
@@ -65,7 +67,7 @@
                                                         {{slider.description}}
                                                     </p>
                                                     <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-lg-4 gap-3 pt-3 mt-lg-4">
-                                                        <a :href="`movie-details.html?name=${encodeURIComponent(slider.name)}&id=${encodeURIComponent(slider.video.id)}`" class="hl-btn big-btn lh-1 btn-base fs-18 fw-bold radius-100 flex-shrink-0 text-uppercase">
+                                                        <a :href="`movie-details.html?na=${encodeURIComponent(slider.name)}&ia=${encodeURIComponent(slider.video.id)}&ca=${encodeURIComponent(country)}`" class="hl-btn big-btn lh-1 btn-base fs-18 fw-bold radius-100 flex-shrink-0 text-uppercase">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
                                                                 <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
@@ -91,74 +93,6 @@
                     </div>
                     <!-- End Slider Counter -->
                 </div>
-
-                <!-- Start Primary Navigation Bar -->
-                <ul class="primary-nav position-absolute d-xl-inline-block d-none top-50 translate-middle-y end-0 z-1 radius-100 text-end">
-                    <li class="primary-nav--item">
-                        <a href="index.html" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Home</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                <path opacity="0.4" d="M7.77539 15.396H13.432" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.27832 13.0396C1.27832 7.56192 1.8756 7.94422 5.09062 4.96267C6.49725 3.83036 8.68597 1.64551 10.5761 1.64551C12.4652 1.64551 14.6977 3.81966 16.117 4.96267C19.332 7.94422 19.9283 7.56192 19.9283 13.0396C19.9283 21.101 18.0227 21.101 10.6033 21.101C3.18399 21.101 1.27832 21.101 1.27832 13.0396Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="primary-nav--item">
-                        <a href="search.html" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Search</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7422 2.98734C7.0676 2.98734 3.27811 6.77683 3.27811 11.4515C3.27811 16.1259 7.0676 19.9155 11.7422 19.9155C16.4168 19.9155 20.2062 16.1259 20.2062 11.4515C20.2062 6.77683 16.4168 2.98734 11.7422 2.98734ZM0.873047 11.4515C0.873047 5.44856 5.73932 0.582275 11.7422 0.582275C17.745 0.582275 22.6113 5.44856 22.6113 11.4515C22.6113 17.4543 17.745 22.3205 11.7422 22.3205C5.73932 22.3205 0.873047 17.4543 0.873047 11.4515Z" fill="white"/>
-                                <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M18.3401 16.87L25.5186 24.0299L23.8202 25.7327L16.6416 18.5728L18.3401 16.87Z" fill="white"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="primary-nav--item">
-                        <a href="#" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">My Movies</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 25 19" fill="none">
-                                <path opacity="0.4" d="M17.4746 7.01366C19.685 5.26138 22.6513 3.56637 23.2124 4.17336C24.14 5.16975 24.0599 14.6526 23.2124 15.5573C22.697 16.1185 19.7078 14.4235 17.4746 12.6828" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.07617 9.8567C1.07617 3.61268 3.15026 1.53174 9.3748 1.53174C15.5982 1.53174 17.6723 3.61268 17.6723 9.8567C17.6723 16.0995 15.5982 18.1817 9.3748 18.1817C3.15026 18.1817 1.07617 16.0995 1.07617 9.8567Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="primary-nav--item">
-                        <a href="#" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Add To Playlist</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8481 19.2405C23.5122 19.2405 24.0506 18.7021 24.0506 18.038C24.0506 17.3738 23.5122 16.8354 22.8481 16.8354H1.20253C0.538392 16.8354 0 17.3738 0 18.038C0 18.7021 0.538392 19.2405 1.20253 19.2405H22.8481ZM22.8481 10.8228C23.5122 10.8228 24.0506 10.2844 24.0506 9.62025C24.0506 8.95611 23.5122 8.41772 22.8481 8.41772H13.2278C12.5637 8.41772 12.0253 8.95611 12.0253 9.62025C12.0253 10.2844 12.5637 10.8228 13.2278 10.8228H22.8481ZM22.8481 2.40506C23.5122 2.40506 24.0506 1.86667 24.0506 1.20253C24.0506 0.538392 23.5122 0 22.8481 0H13.2278C12.5637 0 12.0253 0.538392 12.0253 1.20253C12.0253 1.86667 12.5637 2.40506 13.2278 2.40506H22.8481Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 2.77086C0 1.82635 1.03893 1.25053 1.83987 1.75112L7.98866 5.59411C8.74225 6.0651 8.74225 7.16261 7.98866 7.6336L1.83987 11.4766C1.03893 11.9772 0 11.4014 0 10.4568V2.77086ZM2.40506 6.61385C2.40506 7.3423 3.20632 7.78639 3.82404 7.40032C4.40524 7.03707 4.40524 6.19063 3.82404 5.82739C3.20632 5.44132 2.40506 5.88541 2.40506 6.61385Z" fill="white" fill-opacity="0.4"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="primary-nav--item">
-                        <a href="#" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Profile</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
-                                <rect x="0.826172" y="0.952637" width="21.3481" height="16.2073" rx="4.25" stroke="white" stroke-width="1.5"/>
-                                <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M19.3914 22.4796C19.2825 22.6896 19.0233 22.7706 18.8103 22.6677C13.1836 19.9497 7.02367 21.261 4.25359 22.4116C4.03509 22.5023 3.78297 22.4086 3.68333 22.194C3.5837 21.9794 3.67424 21.7253 3.89252 21.634C6.7971 20.4194 13.2598 19.0234 19.2047 21.9067C19.4176 22.01 19.5003 22.2696 19.3914 22.4796Z" fill="white" stroke="white"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <!-- <li class="primary-nav--item">
-                        <a href="pagination-two.html" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Games</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 25 19" fill="none">
-                                <path opacity="0.4" d="M21.0102 17.5435C20.5659 17.6219 20.1093 17.5921 19.679 17.4565C19.2487 17.3209 18.8575 17.0836 18.5384 16.7647L14.3174 11.9734H16.5136C17.2747 11.9742 18.0267 11.8081 18.7166 11.4869C19.4066 11.1657 20.0177 10.6971 20.507 10.1142C20.9963 9.53123 21.3518 8.8481 21.5486 8.11289C21.7453 7.37769 21.7785 6.60829 21.6457 5.85889L23.2856 14.2959C23.4138 15.0282 23.2462 15.7814 22.8196 16.3903C22.393 16.9992 21.7423 17.414 21.0102 17.5435Z" fill="white"/>
-                                <path d="M16.9147 7.96391H14.509C14.2963 7.96391 14.0924 7.87942 13.942 7.72904C13.7916 7.57865 13.7071 7.37468 13.7071 7.16201C13.7071 6.94933 13.7916 6.74537 13.942 6.59498C14.0924 6.4446 14.2963 6.36011 14.509 6.36011H16.9147C17.1274 6.36011 17.3313 6.4446 17.4817 6.59498C17.6321 6.74537 17.7166 6.94933 17.7166 7.16201C17.7166 7.37468 17.6321 7.57865 17.4817 7.72904C17.3313 7.87942 17.1274 7.96391 16.9147 7.96391ZM9.69761 6.36011H8.89571V5.55821C8.89571 5.34554 8.81123 5.14157 8.66084 4.99119C8.51046 4.8408 8.30649 4.75632 8.09381 4.75632C7.88114 4.75632 7.67717 4.8408 7.52679 4.99119C7.3764 5.14157 7.29192 5.34554 7.29192 5.55821V6.36011H6.49002C6.27734 6.36011 6.07338 6.4446 5.92299 6.59498C5.77261 6.74537 5.68812 6.94933 5.68812 7.16201C5.68812 7.37468 5.77261 7.57865 5.92299 7.72904C6.07338 7.87942 6.27734 7.96391 6.49002 7.96391H7.29192V8.7658C7.29192 8.97848 7.3764 9.18245 7.52679 9.33283C7.67717 9.48322 7.88114 9.5677 8.09381 9.5677C8.30649 9.5677 8.51046 9.48322 8.66084 9.33283C8.81123 9.18245 8.89571 8.97848 8.89571 8.7658V7.96391H9.69761C9.91029 7.96391 10.1143 7.87942 10.2646 7.72904C10.415 7.57865 10.4995 7.37468 10.4995 7.16201C10.4995 6.94933 10.415 6.74537 10.2646 6.59498C10.1143 6.4446 9.91029 6.36011 9.69761 6.36011ZM23.4782 16.8499C23.176 17.2815 22.7829 17.6417 22.3267 17.9051C21.8704 18.1685 21.362 18.3289 20.8371 18.3748C20.3122 18.4208 19.7837 18.3512 19.2886 18.1711C18.7935 17.9909 18.3438 17.7046 17.9712 17.3321C17.9592 17.32 17.9471 17.308 17.9361 17.295L13.9557 12.7753H10.2469L6.2705 17.295L6.23542 17.3321C5.55802 18.008 4.64033 18.3879 3.68338 18.3886C3.15657 18.3884 2.63619 18.2728 2.1588 18.0501C1.68141 17.8273 1.25858 17.5027 0.920025 17.0991C0.581466 16.6955 0.335385 16.2226 0.19907 15.7138C0.0627546 15.2049 0.0395104 14.6724 0.13097 14.1536C0.130487 14.1489 0.130487 14.1442 0.13097 14.1395L1.77185 5.71057C2.01606 4.32035 2.74241 3.06067 3.82326 2.15287C4.90412 1.24507 6.27033 0.747227 7.68184 0.746826H16.5137C17.921 0.749071 19.283 1.24406 20.3633 2.14586C21.4437 3.04766 22.1741 4.29931 22.4277 5.68351C22.4277 5.68952 22.4277 5.69554 22.4277 5.70155L24.0686 14.1385C24.0691 14.1432 24.0691 14.1479 24.0686 14.1526C24.1535 14.6189 24.1451 15.0974 24.0437 15.5604C23.9424 16.0234 23.7502 16.4617 23.4782 16.8499ZM16.5137 11.1715C17.6835 11.1715 18.8053 10.7068 19.6324 9.87971C20.4595 9.05259 20.9242 7.93078 20.9242 6.76106C20.9242 5.59134 20.4595 4.46953 19.6324 3.64241C18.8053 2.81529 17.6835 2.35062 16.5137 2.35062H7.68184C6.64634 2.35155 5.64434 2.71763 4.85212 3.38444C4.05989 4.05126 3.5282 4.9761 3.35059 5.99625V6.00928L1.7087 14.4382C1.63613 14.8561 1.69796 15.2862 1.8853 15.6668C2.07264 16.0473 2.37584 16.3586 2.75129 16.5559C3.12673 16.7532 3.55509 16.8263 3.97473 16.7648C4.39438 16.7033 4.7837 16.5102 5.0867 16.2134L9.28864 11.4431C9.36388 11.3578 9.45642 11.2894 9.56012 11.2426C9.66381 11.1957 9.77629 11.1715 9.89007 11.1715H16.5137ZM22.4979 14.4382L21.6218 9.92755C21.083 10.7976 20.3311 11.5158 19.4372 12.0141C18.5434 12.5124 17.5371 12.7744 16.5137 12.7753H16.0927L19.1199 16.2144C19.3481 16.4364 19.6258 16.6011 19.93 16.6951C20.2342 16.789 20.5564 16.8094 20.8701 16.7547C21.3926 16.6625 21.8572 16.3669 22.1622 15.9327C22.4671 15.4984 22.5875 14.961 22.4969 14.4382H22.4979Z" fill="white"/>
-                            </svg>
-                        </a>
-                    </li> -->
-                    <!-- <li class="primary-nav--item">
-                        <a href="pagination-one.html" class="primary-nav--link fw-bold text-uppercase radius-100 lh-1">
-                            <span class="link-text">Sports</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path opacity="0.4" d="M23.0279 10.2875C22.644 13.2048 21.5247 16.4159 18.8652 19.0696C16.2057 21.7233 13.0005 22.8472 10.0831 23.2323L1.17383 14.3206C1.55772 11.4033 2.67702 8.19225 5.33651 5.53854C7.996 2.88483 11.2013 1.7609 14.1244 1.37585L23.0348 10.2863L23.0279 10.2875Z" fill="white"/>
-                                <path d="M23.787 3.73485C23.6549 2.95637 23.284 2.23823 22.7257 1.6799C22.1673 1.12157 21.4492 0.750687 20.6707 0.618618C16.9278 -0.0161913 9.87204 -0.306423 4.68256 4.88537C-0.506919 10.0772 -0.219 17.1306 0.415809 20.8735C0.548231 21.6528 0.919967 22.3716 1.47942 22.93C2.03887 23.4884 2.75829 23.8588 3.53782 23.9898C4.84924 24.2134 6.17705 24.3271 7.5074 24.3297C11.218 24.3297 15.8385 23.4047 19.5202 19.723C24.7108 14.5335 24.4218 7.47779 23.787 3.73485ZM16.663 2.11603C17.9033 2.1204 19.141 2.2287 20.3632 2.43979C20.7634 2.50816 21.1325 2.69922 21.4194 2.98654C21.7063 3.27386 21.8968 3.64324 21.9646 4.04358C22.2032 5.42633 22.3077 6.82887 22.2768 8.2317L16.1727 2.12875C16.3346 2.1195 16.4953 2.11718 16.663 2.11718V2.11603ZM3.84077 22.1674C3.44048 22.0994 3.07124 21.9086 2.78412 21.6215C2.49701 21.3343 2.30622 20.9651 2.23814 20.5648C1.99957 19.1821 1.89502 17.7795 1.92594 16.3767L8.02889 22.4796C6.62604 22.5111 5.22345 22.4066 3.84077 22.1674ZM18.2136 18.4164C16.8711 19.7577 14.3666 21.6228 10.4236 22.2634L2.14217 13.982C2.78276 10.039 4.64787 7.53445 5.98918 6.19199C7.33049 4.84952 9.83503 2.98441 13.778 2.34382L22.0606 10.6264C21.42 14.5694 19.5549 17.0739 18.2136 18.4164ZM16.4537 7.95188C16.627 8.12534 16.7244 8.36053 16.7244 8.60576C16.7244 8.851 16.627 9.08619 16.4537 9.25965L14.7956 10.9166L15.5287 11.6497C15.6201 11.7343 15.6935 11.8365 15.7444 11.9501C15.7954 12.0637 15.8229 12.1865 15.8253 12.311C15.8277 12.4355 15.8049 12.5592 15.7583 12.6747C15.7117 12.7902 15.6423 12.8951 15.5542 12.9831C15.4661 13.0711 15.3612 13.1404 15.2456 13.1869C15.1301 13.2334 15.0064 13.2561 14.8819 13.2536C14.7574 13.2511 14.6346 13.2234 14.5211 13.1724C14.4075 13.1213 14.3054 13.0478 14.2209 12.9563L13.4889 12.2244L12.0216 13.6918L12.7547 14.4248C12.8462 14.5093 12.9197 14.6114 12.9707 14.725C13.0218 14.8386 13.0494 14.9613 13.0519 15.0858C13.0544 15.2103 13.0317 15.3341 12.9853 15.4496C12.9388 15.5651 12.8695 15.6701 12.7814 15.7582C12.6934 15.8463 12.5885 15.9157 12.473 15.9623C12.3575 16.0089 12.2338 16.0316 12.1093 16.0293C11.9848 16.0269 11.8621 15.9994 11.7484 15.9484C11.6348 15.8974 11.5326 15.824 11.4481 15.7326L10.7138 14.9984L9.05569 16.6565C8.97064 16.746 8.86854 16.8176 8.7554 16.867C8.64225 16.9165 8.52036 16.9427 8.3969 16.9443C8.27344 16.9459 8.15091 16.9228 8.03653 16.8762C7.92216 16.8297 7.81826 16.7608 7.73095 16.6735C7.64364 16.5862 7.5747 16.4823 7.52818 16.3679C7.48166 16.2535 7.45851 16.131 7.46009 16.0075C7.46167 15.8841 7.48795 15.7622 7.53738 15.649C7.58682 15.5359 7.6584 15.4338 7.74791 15.3487L9.4072 13.6918L8.67411 12.9587C8.51191 12.783 8.42399 12.5515 8.42879 12.3125C8.43358 12.0735 8.53072 11.8456 8.69983 11.6766C8.86894 11.5077 9.0969 11.4107 9.33591 11.4061C9.57492 11.4016 9.80642 11.4897 9.98188 11.652L10.715 12.3851L12.1812 10.9166L11.4481 10.1835C11.2857 10.0081 11.1976 9.77657 11.2022 9.53756C11.2068 9.29855 11.3037 9.07059 11.4727 8.90148C11.6416 8.73237 11.8695 8.63524 12.1085 8.63044C12.3475 8.62565 12.5791 8.71356 12.7547 8.87576L13.4889 9.61001L15.1471 7.95188C15.3205 7.77888 15.5554 7.68173 15.8004 7.68173C16.0453 7.68173 16.2803 7.77888 16.4537 7.95188Z" fill="white"/>
-                            </svg>
-                        </a>
-                    </li> -->
-                </ul>
-                <!-- End Primary Navigation Bar -->
 
                 <!-- Start Secondary Navigation Bar -->
                 <div class="secondary-nav row align-items-center position-absolute top-0 start-0 end-0 mx-auto z-1 mx-xl-5">
@@ -207,7 +141,7 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"/>
                                 <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"/>
                             </svg>
-                            <span>Register Now</span>
+                            <span> Register Now</span>
                         </a>
 
                         <a href="login.html" class="hl-btn btn-base text-uppercase radius-100 fs-18  d-md-inline-block d-none">
@@ -215,11 +149,11 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"/>
                                 <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"/>
                             </svg>
-                            <span>Login Now</span>
+                            <span> Login Now</span>
                         </a>
-                        <a href="#" class="profile-btn d-inline-block">
+                        <!-- <a href="#" class="profile-btn d-inline-block">
                             <img src="assets/images/icons/profile.svg" alt="profile" class="w-100 h-100">
-                        </a>
+                        </a> -->
                         <button id="navigation-button2" class="menu-button menu menu_btn d-md-none border-0 bg-transparent">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
                                 <path d="M0 0H16V1.77778H0V0ZM0 6.22222H10.6667V8H0V6.22222ZM0 12.4444H16V14.2222H0V12.4444Z" fill="#fff"></path>
@@ -230,7 +164,7 @@
                 <!-- End Secondary Navigation Bar -->
 
                 <!-- Scroll Down Indicator -->
-                <a href="#trending-now" class="scroll-down gap-3 position-absolute bottom-0 start-0 z-1 ms-5 mb-5 pb-5 d-lg-inline-block d-none">
+                <a href="#slider2" class="scroll-down gap-3 position-absolute bottom-0 start-0 z-1 ms-5 mb-5 pb-5 d-lg-inline-block d-none">
                     <div class="text ms-1">Scroll Down</div>
                     <svg class="mt-2" width="32" height="56" viewBox="0 0 32 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.2773 0V55" stroke="#E2E2E2" stroke-width="2"></path>
@@ -278,6 +212,25 @@
                                     <li class="menu-item"><a href="index.html">Home</a></li>
                                     <li class="menu-item"><a href="about.html">About</a></li>
                                     <li class="menu-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    <li class="menu-item"><a href="faq.html">FAQ</a></li>
+                                    <li class="menu-item">
+                                        <a href="login.html" class="hl-btn btn-base text-uppercase radius-100 fs-18  d-md-inline-block d-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"/>
+                                                <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"/>
+                                            </svg>
+                                            <span> Login Now</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="registration.html" class="hl-btn btn-base text-uppercase radius-100 fs-18  d-md-inline-block d-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"/>
+                                                <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"/>
+                                            </svg>
+                                            <span> Register Now</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>                    
                         </div>
@@ -319,150 +272,29 @@
                     <div class="swiper trending-slider-two">
                         <div class="swiper-wrapper">
                             <!-- Single Small Movie Card -->
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" v-for="film in films" :key="film.id">
                                 <div class="movie-card-small style-two">
                                     <a href="#" class="thumb d-inline-block">
-                                        <img src="assets/images/home-2/card/1.webp" alt="card-img" class="">
+                                        <img :src="film.thumbnail" :alt="film.name" class="thumbnailImage">
                                     </a>
                                     <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Tarrot</a></h4>
+                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{film.name}}</a></h4>
                                         <ul class="movie-info">
                                             <li>
                                                 <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                                <span>6.8</span>
+                                                <span>{{film.reviews_rating}}</span>
                                             </li>
                                             <li>
                                                 <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                                <span>02h 30m</span>
+                                                <span>{{film.videoMeta.video_length}}</span>
                                             </li>
                                             <li>
                                                 <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                                <span>4k Quality</span>
+                                                <span>{{film.videoMeta.video_quanlity}}</span>
                                             </li>
                                         </ul>
                                         <ul class="movie-type">
-                                            <li>Action,</li>
-                                            <li>Comedy,</li>
-                                            <li>Crime</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Single Small Movie Card -->
-                                <div class="movie-card-small style-two">
-                                    <a href="#" class="thumb d-inline-block">
-                                        <img src="assets/images/home-2/card/2.webp" alt="card-img" class="">
-                                    </a>
-                                    <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">Hideo Kojima</a></h4>
-                                        <ul class="movie-info">
-                                            <li>
-                                                <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                                <span>6.8</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                                <span>02h 30m</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                                <span>4k Quality</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="movie-type">
-                                            <li>Drama,</li>
-                                            <li>Comedy,</li>
-                                            <li>Crime</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Single Small Movie Card -->
-                                <div class="movie-card-small style-two">
-                                    <a href="#" class="thumb d-inline-block">
-                                        <img src="assets/images/home-2/card/3.webp" alt="card-img" class="">
-                                    </a>
-                                    <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">Wanted</a></h4>
-                                        <ul class="movie-info">
-                                            <li>
-                                                <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                                <span>7.1</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                                <span>01h 40m</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                                <span>4k Quality</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="movie-type">
-                                            <li>Family,</li>
-                                            <li>Comedy,</li>
-                                            <li>Drama</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Single Small Movie Card -->
-                                <div class="movie-card-small style-two">
-                                    <a href="#" class="thumb d-inline-block">
-                                        <img src="assets/images/home-2/card/4.webp" alt="card-img" class="">
-                                    </a>
-                                    <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">don’t exposed</a></h4>
-                                        <ul class="movie-info">
-                                            <li>
-                                                <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                                <span>6.8</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                                <span>02h 30m</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                                <span>4k Quality</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="movie-type">
-                                            <li>Action,</li>
-                                            <li>War,</li>
-                                            <li>Crime</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="movie-card-small style-two">
-                                    <a href="#" class="thumb d-inline-block">
-                                        <img src="assets/images/home-2/card/5.webp" alt="card-img" class="">
-                                    </a>
-                                    <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">Nebula’s Embrace</a></h4>
-                                        <ul class="movie-info">
-                                            <li>
-                                                <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                                <span>7.4</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                                <span>01h 30m</span>
-                                            </li>
-                                            <li>
-                                                <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                                <span>8k Quality</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="movie-type">
-                                            <li>Exposed,</li>
-                                            <li>Comedy,</li>
-                                            <li>Crime</li>
+                                            <li>{{film.category.name}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -497,9 +329,9 @@
                     <div class="swiper newest-release-slider pt-60 pb-80">
                         <div class="swiper-wrapper">
                             <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
+                            <div class="movie-card-small position-relative style-three swiper-slide" v-for="newestRealeasesFilm in newestRealeasesFilms" :key="newestRealeasesFilm.id">
                                 <div class="thumb">
-                                    <img src="assets/images/trending/trending-17.webp" alt="card-img" class="w-100">
+                                    <img :src="newestRealeasesFilm.thumbnail" :alt="newestRealeasesFilm.name" class="w-100">
                                 </div>
                                 <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
@@ -507,352 +339,23 @@
                                     </svg>
                                 </a>
                                 <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Ark Menace</a></h4>
+                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
                                     <ul class="movie-info">
                                         <li>
                                             <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>7.9</span>
+                                            <span>{{newestRealeasesFilm.reviews_rating}}</span>
                                         </li>
                                         <li>
                                             <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 00m</span>
+                                            <span>{{newestRealeasesFilm.videoMeta.video_length}}</span>
                                         </li>
                                         <li>
                                             <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
+                                            <span>{{newestRealeasesFilm.videoMeta.video_quanlity}}</span>
                                         </li>
                                     </ul>
                                     <ul class="movie-type">
-                                        <li>Menace,</li>
-                                        <li>Comedy</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-16.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>5.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-15.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">Cebula’s Xmbrace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-8.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Ark Mans</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>5.9</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-9.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Wanted</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-14.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-13.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">Shadow Of Down</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Web Serise,</li>
-                                        <li>Comedy Serise</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-12.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
+                                        <li>{{newestRealeasesFilm.category.name}}</li>
                                     </ul>
                                 </div>
                                 <div class="options">
@@ -875,455 +378,13 @@
                 </div> 
                 <!-- End Newest Release Slider Area -->
 
-                <!-- Start Trending Slider Area -->
-                <div class="pt-80 bg-gradient-black">
-                    <div class="hl-container d-flex align-items-center justify-content-between mb--20">
-                        <h2 class="d-inline-flex align-item-center section-header style-two mb-0 lh-1">
-                            <span class="section-title mt-2">Trending Now</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="40" viewBox="0 0 21 40" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.88911 14.9994C3.37383 10.5446 0.73813 4.55253 0 0.345635L1.96991 0C2.63631 3.79806 5.05691 9.33313 10.1458 13.4436C12.861 15.6367 16.3628 17.4461 20.8135 18.3595V21.6434C16.3628 22.5568 12.861 24.3662 10.1458 26.5593C5.05691 30.6698 2.63631 36.2048 1.96991 40.0029L0 39.6573C0.73813 35.4504 3.37383 29.4583 8.88911 25.0035C11.5757 22.8334 14.9236 21.0459 19.0292 20.0014C14.9236 18.957 11.5757 17.1695 8.88911 14.9994Z" fill="currentColor"/>
-                            </svg>
-                        </h2>
-                        <div class="slider-btn-wrapper d-flex align-item-center justify-content-center gap-3">
-                            <button class="slider-btn slider-btn--sm prev-slide2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.41044 1.56256V0.863892H8.8062V1.56256C8.8062 4.21543 7.33751 6.76691 5.12691 8.27841H22.3364V9.67573H5.12683C7.33747 11.1872 8.8062 13.7387 8.8062 16.3916V17.0902H7.41044V16.3916C7.41044 12.9571 4.36603 9.68764 0.721895 9.67577C0.71526 9.67578 0.70862 9.67579 0.701981 9.67579H0.00409889V9.67573V8.27847V8.27841H0.00468445H0.701981H0.72875C4.36984 8.26246 7.41044 4.99496 7.41044 1.56256Z" fill="white"/>
-                                </svg>
-                            </button>
-                            <button class="slider-btn next-slide slider-btn--sm next-slide2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="17" viewBox="0 0 23 17" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.4455 1.26104V0.562378H14.0498V1.26104C14.0498 3.91391 15.5185 6.46539 17.729 7.97689H0.519531V9.37422H17.7291C15.5185 10.8857 14.0498 13.4372 14.0498 16.0901V16.7887H15.4455V16.0901C15.4455 12.6556 18.4899 9.38613 22.1341 9.37425C22.1407 9.37427 22.1473 9.37428 22.154 9.37428H22.8519V9.37422V7.97695V7.97689H22.8513H22.154H22.1272C18.4861 7.96094 15.4455 4.69344 15.4455 1.26104Z" fill="currentColor"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="trending-now" class="swiper newest-release-slider2 pt-60 pb-80">
-                        <div class="swiper-wrapper">
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-20.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.4</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 10m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Phantom,</li>
-                                        <li>Thriller</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-19.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.2</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 45m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Fighter,</li>
-                                        <li>Action</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-18.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.1</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Drama,</li>
-                                        <li>Comedy,</li>
-                                        <li>Serial</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-17.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.5</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-11.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.6</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 20m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Award Winner,</li>
-                                        <li>Tv Serise</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-10.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.7</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 50m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>8k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Horror,</li>
-                                        <li>Comedy,</li>
-                                        <li>Serise</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-1.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>8.0</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 40m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Award,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Trending Slider Area -->
-
-                <!-- Start Movie Categories Area 02 -->
-                <div class="category-two py-80">
-                    <h2 class="section-title text-center mb-30">Browse by category</h2>
-                    <div class="category-inner">
-                        <div class="category-card category-card--two">
-                            <div class="thumbnail position-relative flex-grow-1">
-                                <div class="thumb thumb--one"><img src="assets/images/category/card-1/1.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--two"><img src="assets/images/category/card-1/2.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--three"><img src="assets/images/category/card-1/3.webp" alt="card-img" class="card-img"></div>
-                            </div>
-                            <div class="details">
-                                <h4 class="title lh-1 mb-0">Family tv Series</h4>
-                                <a href="category.html" class="hl-btn circle-btn flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3368 0.763844V0H14.8091V0.763844C14.8091 3.66421 16.4166 6.45372 18.8361 8.10623H0V9.63392H18.8362C16.4166 11.2864 14.8091 14.0759 14.8091 16.9763V17.7401H16.3368V16.9763C16.3368 13.2214 19.6689 9.64694 23.6575 9.63396C23.6648 9.63398 23.672 9.63399 23.6793 9.63399H24.4431V9.63392V8.1063V8.10623H24.4425H23.6793H23.65C19.6648 8.0888 16.3368 4.51646 16.3368 0.763844Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Category Card -->
-                        <div class="category-card category-card--two">
-                            <div class="thumbnail position-relative flex-grow-1">
-                                <div class="thumb thumb--one"><img src="assets/images/category/card-2/1.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--two"><img src="assets/images/category/card-2/2.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--three"><img src="assets/images/category/card-2/3.webp" alt="card-img" class="card-img"></div>
-                            </div>
-                            <div class="details">
-                                <h4 class="title lh-1 mb-0">Action tv Series</h4>
-                                <a href="category.html" class="hl-btn circle-btn flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3368 0.763844V0H14.8091V0.763844C14.8091 3.66421 16.4166 6.45372 18.8361 8.10623H0V9.63392H18.8362C16.4166 11.2864 14.8091 14.0759 14.8091 16.9763V17.7401H16.3368V16.9763C16.3368 13.2214 19.6689 9.64694 23.6575 9.63396C23.6648 9.63398 23.672 9.63399 23.6793 9.63399H24.4431V9.63392V8.1063V8.10623H24.4425H23.6793H23.65C19.6648 8.0888 16.3368 4.51646 16.3368 0.763844Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Category Card -->
-                        <div class="category-card category-card--two">
-                            <div class="thumbnail position-relative flex-grow-1">
-                                <div class="thumb thumb--one"><img src="assets/images/category/card-3/1.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--two"><img src="assets/images/category/card-3/2.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--three"><img src="assets/images/category/card-3/3.webp" alt="card-img" class="card-img"></div>
-                            </div>
-                            <div class="details">
-                                <h4 class="title lh-1 mb-0">Comedy tv Series</h4>
-                                <a href="category.html" class="hl-btn circle-btn flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3368 0.763844V0H14.8091V0.763844C14.8091 3.66421 16.4166 6.45372 18.8361 8.10623H0V9.63392H18.8362C16.4166 11.2864 14.8091 14.0759 14.8091 16.9763V17.7401H16.3368V16.9763C16.3368 13.2214 19.6689 9.64694 23.6575 9.63396C23.6648 9.63398 23.672 9.63399 23.6793 9.63399H24.4431V9.63392V8.1063V8.10623H24.4425H23.6793H23.65C19.6648 8.0888 16.3368 4.51646 16.3368 0.763844Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Category Card -->
-                        <div class="category-card category-card--two">
-                            <div class="thumbnail position-relative flex-grow-1">
-                                <div class="thumb thumb--one"><img src="assets/images/category/card-4/1.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--two"><img src="assets/images/category/card-4/2.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--three"><img src="assets/images/category/card-4/3.webp" alt="card-img" class="card-img"></div>
-                            </div>
-                            <div class="details">
-                                <h4 class="title lh-1 mb-0">Web and tv Series</h4>
-                                <a href="category.html" class="hl-btn circle-btn flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3368 0.763844V0H14.8091V0.763844C14.8091 3.66421 16.4166 6.45372 18.8361 8.10623H0V9.63392H18.8362C16.4166 11.2864 14.8091 14.0759 14.8091 16.9763V17.7401H16.3368V16.9763C16.3368 13.2214 19.6689 9.64694 23.6575 9.63396C23.6648 9.63398 23.672 9.63399 23.6793 9.63399H24.4431V9.63392V8.1063V8.10623H24.4425H23.6793H23.65C19.6648 8.0888 16.3368 4.51646 16.3368 0.763844Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Category Card -->
-                        <div class="category-card category-card--two">
-                            <div class="thumbnail position-relative flex-grow-1">
-                                <div class="thumb thumb--one"><img src="assets/images/category/card-5/1.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--two"><img src="assets/images/category/card-5/2.webp" alt="card-img" class="card-img"></div>
-                                <div class="thumb thumb--three"><img src="assets/images/category/card-5/3.webp" alt="card-img" class="card-img"></div>
-                            </div>
-                            <div class="details">
-                                <h4 class="title lh-1 mb-0">Hottor tv Series</h4>
-                                <a href="category.html" class="hl-btn circle-btn flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.3368 0.763844V0H14.8091V0.763844C14.8091 3.66421 16.4166 6.45372 18.8361 8.10623H0V9.63392H18.8362C16.4166 11.2864 14.8091 14.0759 14.8091 16.9763V17.7401H16.3368V16.9763C16.3368 13.2214 19.6689 9.64694 23.6575 9.63396C23.6648 9.63398 23.672 9.63399 23.6793 9.63399H24.4431V9.63392V8.1063V8.10623H24.4425H23.6793H23.65C19.6648 8.0888 16.3368 4.51646 16.3368 0.763844Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Movie Categories Area 02 -->
-
                 <!-- Start Movie Slider Area Two -->
-                <div class="movie-slider swiper rotate-movie-slider py-80">
+                <div class="movie-slider swiper rotate-movie-slider py-80"  id="slider2">
                     <div class="swiper-wrapper">
                         <!-- One -->
-                        <div class="rotate-movie-card position-relative swiper-slide">
+                        <div class="rotate-movie-card position-relative swiper-slide" v-for="film in films" :key="film.id">
                             <div class="thumb">
-                                <img src="assets/images/home-2/slider-md-01.webp" alt="card-img">
+                                <img :src="film.banner" :alt="film.name" class="card-img">
                             </div>
                             <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43" fill="none">
@@ -1336,155 +397,29 @@
                                     <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-2.webp" alt="certificates"></li>
                                     <li class="d-inline-block"><img src="assets/images/icons/certificate-3.webp" alt="certificates"></li>
                                 </ul>
-                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">The Ring of fire</a></h2>
+                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">{{film.name}}</a></h2>
                                 <ul class="movie-info-list d-flex align-item-center justify-content-center gap-1 gap-lg-2">
                                     <li class="movie-info-list--item style-two radius-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <path d="M8.00004 12.4493L3.05574 15.2169L4.16001 9.65938L0 5.81235L5.62676 5.14521L8.00004 0L10.3733 5.14521L16 5.81235L11.8401 9.65938L12.9443 15.2169L8.00004 12.4493Z" fill="currentColor"/>
                                         </svg>
-                                        <span>7.2 Reviews</span>
+                                        <span>{{film.reviews_rating}}</span>
                                     </li>
                                     <li class="movie-info-list--item style-two radius-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                                             <path d="M7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 11.6421 11.6421 15 7.5 15ZM8.25 7.5V3.75H6.75V9H11.25V7.5H8.25Z" fill="currentColor"/>
                                         </svg>
-                                        <span>02h 20m</span>
+                                        <span>{{film.videoMeta.video_length}}</span>
                                     </li>
                                     <li class="movie-info-list--item style-two radius-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
                                             <path d="M0.8 0H15.2C15.6418 0 16 0.3731 16 0.833333V14.1667C16 14.6269 15.6418 15 15.2 15H0.8C0.358176 15 0 14.6269 0 14.1667V0.833333C0 0.3731 0.358176 0 0.8 0ZM7.6 8.75V7.5H6.8V5H5.6V7.5H4.4V5H3.2V8.75H5.6V10H6.8V8.75H7.6ZM12.8 10L11 7.5L12.8 5H11.4L10 6.875V5H8.8V10H10V8.125L11.4 10H12.8Z" fill="currentColor"/>
                                         </svg>
-                                        <span>4k Quality</span>
+                                        <span>{{film.videoMeta.video_quanlity}}</span>
                                     </li>
                                 </ul>
                                 <p class="card-description">
-                                    The Lord of the Rings is a trilogy of epic fantasy adventure films directed.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Two -->
-                        <div class="rotate-movie-card position-relative swiper-slide">
-                            <div class="thumb">
-                                <img src="assets/images/home-2/slider-md-02.webp" alt="card-img">
-                            </div>
-                            <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43" fill="none">
-                                    <path d="M35.1842 19.7904C36.467 20.5692 36.467 22.4308 35.1842 23.2096L3.97913 42.1555C2.64629 42.9647 0.941173 42.0052 0.941173 40.4459L0.941175 2.55405C0.941175 0.994777 2.64629 0.0352452 3.97913 0.844472L35.1842 19.7904Z" fill="white"/>
-                                </svg>
-                            </a>
-                            <div class="content position-absolute start-0 bottom-0 w-100 text-center">
-                                <ul class="certificates">
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-1.webp" alt="certificates"></li>
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-2.webp" alt="certificates"></li>
-                                    <li class="d-inline-block"><img src="assets/images/icons/certificate-3.webp" alt="certificates"></li>
-                                </ul>
-                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">The Ring of fire</a></h2>
-                                <ul class="movie-info-list d-flex align-item-center justify-content-center gap-1 gap-lg-2">
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8.00004 12.4493L3.05574 15.2169L4.16001 9.65938L0 5.81235L5.62676 5.14521L8.00004 0L10.3733 5.14521L16 5.81235L11.8401 9.65938L12.9443 15.2169L8.00004 12.4493Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>7.9 Reviews</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                                            <path d="M7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 11.6421 11.6421 15 7.5 15ZM8.25 7.5V3.75H6.75V9H11.25V7.5H8.25Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>02h 50m</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                                            <path d="M0.8 0H15.2C15.6418 0 16 0.3731 16 0.833333V14.1667C16 14.6269 15.6418 15 15.2 15H0.8C0.358176 15 0 14.6269 0 14.1667V0.833333C0 0.3731 0.358176 0 0.8 0ZM7.6 8.75V7.5H6.8V5H5.6V7.5H4.4V5H3.2V8.75H5.6V10H6.8V8.75H7.6ZM12.8 10L11 7.5L12.8 5H11.4L10 6.875V5H8.8V10H10V8.125L11.4 10H12.8Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>4k Quality</span>
-                                    </li>
-                                </ul>
-                                <p class="card-description">
-                                    The Lord of the Rings is a trilogy of epic fantasy adventure films directed.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Three -->
-                        <div class="rotate-movie-card position-relative swiper-slide">
-                            <div class="thumb">
-                                <img src="assets/images/home-2/slider-md-03.webp" alt="card-img">
-                            </div>
-                            <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43" fill="none">
-                                    <path d="M35.1842 19.7904C36.467 20.5692 36.467 22.4308 35.1842 23.2096L3.97913 42.1555C2.64629 42.9647 0.941173 42.0052 0.941173 40.4459L0.941175 2.55405C0.941175 0.994777 2.64629 0.0352452 3.97913 0.844472L35.1842 19.7904Z" fill="white"/>
-                                </svg>
-                            </a>
-                            <div class="content position-absolute start-0 bottom-0 w-100 text-center">
-                                <ul class="certificates">
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-1.webp" alt="certificates"></li>
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-2.webp" alt="certificates"></li>
-                                    <li class="d-inline-block"><img src="assets/images/icons/certificate-3.webp" alt="certificates"></li>
-                                </ul>
-                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">The Ring of fire</a></h2>
-                                <ul class="movie-info-list d-flex align-item-center justify-content-center gap-1 gap-lg-2">
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8.00004 12.4493L3.05574 15.2169L4.16001 9.65938L0 5.81235L5.62676 5.14521L8.00004 0L10.3733 5.14521L16 5.81235L11.8401 9.65938L12.9443 15.2169L8.00004 12.4493Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>7.9 Reviews</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                                            <path d="M7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 11.6421 11.6421 15 7.5 15ZM8.25 7.5V3.75H6.75V9H11.25V7.5H8.25Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>01h 40m</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                                            <path d="M0.8 0H15.2C15.6418 0 16 0.3731 16 0.833333V14.1667C16 14.6269 15.6418 15 15.2 15H0.8C0.358176 15 0 14.6269 0 14.1667V0.833333C0 0.3731 0.358176 0 0.8 0ZM7.6 8.75V7.5H6.8V5H5.6V7.5H4.4V5H3.2V8.75H5.6V10H6.8V8.75H7.6ZM12.8 10L11 7.5L12.8 5H11.4L10 6.875V5H8.8V10H10V8.125L11.4 10H12.8Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>4k Quality</span>
-                                    </li>
-                                </ul>
-                                <p class="card-description">
-                                    The Lord of the Rings is a trilogy of epic fantasy adventure films directed.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Four -->
-                        <div class="rotate-movie-card position-relative swiper-slide">
-                            <div class="thumb">
-                                <img src="assets/images/home-2/slider-md-04.webp" alt="card-img">
-                            </div>
-                            <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43" fill="none">
-                                    <path d="M35.1842 19.7904C36.467 20.5692 36.467 22.4308 35.1842 23.2096L3.97913 42.1555C2.64629 42.9647 0.941173 42.0052 0.941173 40.4459L0.941175 2.55405C0.941175 0.994777 2.64629 0.0352452 3.97913 0.844472L35.1842 19.7904Z" fill="white"/>
-                                </svg>
-                            </a>
-                            <div class="content position-absolute start-0 bottom-0 w-100 text-center">
-                                <ul class="certificates">
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-1.webp" alt="certificates"></li>
-                                    <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-2.webp" alt="certificates"></li>
-                                    <li class="d-inline-block"><img src="assets/images/icons/certificate-3.webp" alt="certificates"></li>
-                                </ul>
-                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">The Ring of fire</a></h2>
-                                <ul class="movie-info-list d-flex align-item-center justify-content-center gap-1 gap-lg-2">
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8.00004 12.4493L3.05574 15.2169L4.16001 9.65938L0 5.81235L5.62676 5.14521L8.00004 0L10.3733 5.14521L16 5.81235L11.8401 9.65938L12.9443 15.2169L8.00004 12.4493Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>9.1 Reviews</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                                            <path d="M7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 11.6421 11.6421 15 7.5 15ZM8.25 7.5V3.75H6.75V9H11.25V7.5H8.25Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>02h 30m</span>
-                                    </li>
-                                    <li class="movie-info-list--item style-two radius-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                                            <path d="M0.8 0H15.2C15.6418 0 16 0.3731 16 0.833333V14.1667C16 14.6269 15.6418 15 15.2 15H0.8C0.358176 15 0 14.6269 0 14.1667V0.833333C0 0.3731 0.358176 0 0.8 0ZM7.6 8.75V7.5H6.8V5H5.6V7.5H4.4V5H3.2V8.75H5.6V10H6.8V8.75H7.6ZM12.8 10L11 7.5L12.8 5H11.4L10 6.875V5H8.8V10H10V8.125L11.4 10H12.8Z" fill="currentColor"/>
-                                        </svg>
-                                        <span>4k Quality</span>
-                                    </li>
-                                </ul>
-                                <p class="card-description">
-                                    The Lord of the Rings is a trilogy of epic fantasy adventure films directed.
+                                    {{film.short_description}}
                                 </p>
                             </div>
                         </div>
@@ -1518,8 +453,8 @@
                 <!-- Start Our Original -->
                 <div class="pt-80">
                     <div class="hl-container d-flex align-items-center justify-content-between mb--20">
-                        <h2 class="section-title">{{name}} original</h2>
-                        <a href="pagination-one.html" class="hl-btn btn-base small-btn fs-18 fw-normal text-uppercase flex-shrink-0 radius-100">
+                        <h2 class="section-title">{{appName}} original</h2>
+                        <a href="login.html" class="hl-btn btn-base small-btn fs-18 fw-normal text-uppercase flex-shrink-0 radius-100">
                             <span>See All</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none">
                                 <path opacity="0.8" fill-rule="evenodd" clip-rule="evenodd" d="M12.0304 0.562497V0H10.9054V0.562497C10.9054 2.69834 12.0892 4.75254 13.871 5.96946H0V7.09445H13.871C12.0893 8.31136 10.9054 10.3656 10.9054 12.5014V13.0639H12.0304V12.5014C12.0304 9.73629 14.4843 7.10404 17.4214 7.09448C17.4268 7.09449 17.4321 7.0945 17.4375 7.0945H18V7.09445V5.96951V5.96946H17.9995H17.4375H17.4159C14.4812 5.95662 12.0304 3.32594 12.0304 0.562497Z" fill="currentColor"/>
@@ -1529,9 +464,9 @@
                     <div class="our-original swiper newest-release-slider3 pt-60 pb-80">
                         <div class="swiper-wrapper">
                             <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
+                            <div class="movie-card-small position-relative style-three swiper-slide" v-for="wanzamiOriginalFilm in wanzamiOriginalFilms" :key="wanzamiOriginalFilm.id">
                                 <div class="thumb">
-                                    <img src="assets/images/trending/trending-22.webp" alt="card-img" class="w-100">
+                                    <img :src="wanzamiOriginalFilm.thumbnail" :alt="wanzamiOriginalFilm.name" class="w-100">
                                 </div>
                                 <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
@@ -1539,305 +474,23 @@
                                     </svg>
                                 </a>
                                 <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
+                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{wanzamiOriginalFilm.name}}</a></h4>
                                     <ul class="movie-info">
                                         <li>
                                             <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>9.8</span>
+                                            <span>{{wanzamiOriginalFilm.reviews_rating}}</span>
                                         </li>
                                         <li>
                                             <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
+                                            <span>{{wanzamiOriginalFilm.videoMeta.video_length}}</span>
                                         </li>
                                         <li>
                                             <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
+                                            <span>{{wanzamiOriginalFilm.videoMeta.video_quanlity}}</span>
                                         </li>
                                     </ul>
                                     <ul class="movie-type">
-                                        <li>Family,</li>
-                                        <li>Comedy,</li>
-                                        <li>Drama</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-21.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>9.3</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-20.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>9.4</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Top Award,</li>
-                                        <li>Winner</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-19.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.4</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-18.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.5</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Animation,</li>
-                                        <li>Comedy,</li>
-                                        <li>Cartoon</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-17.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>5.9</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>01h 55m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Action,</li>
-                                        <li>Comedy,</li>
-                                        <li>Crime</li>
-                                    </ul>
-                                </div>
-                                <div class="options">
-                                    <button class="option-btn options--1">
-                                        <img src="assets/images/icons/card/add-playlist.svg" alt="playlist">
-                                    </button>
-                                    <button class="option-btn options--2">
-                                        <img src="assets/images/icons/card/casting.svg" alt="casting">
-                                    </button>
-                                    <button class="option-btn options--3">
-                                        <img src="assets/images/icons/card/add-favourite.svg" alt="favourite">
-                                    </button>
-                                    <button class="option-btn options--4">
-                                        <img src="assets/images/icons/card/share.svg" alt="share">
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Single Slider Card -->
-                            <div class="movie-card-small position-relative style-three swiper-slide">
-                                <div class="thumb">
-                                    <img src="assets/images/trending/trending-23.webp" alt="card-img" class="w-100">
-                                </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                                        <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
-                                    </svg>
-                                </a>
-                                <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">The Phantom Menace</a></h4>
-                                    <ul class="movie-info">
-                                        <li>
-                                            <img src="assets/images/icons/card/star-fill.svg" alt="star">
-                                            <span>6.8</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/clock-fill.svg" alt="clock">
-                                            <span>02h 30m</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/images/icons/card/4k-fill.svg" alt="4k">
-                                            <span>4k Quality</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="movie-type">
-                                        <li>Web Serise,</li>
-                                        <li>Comedy Drama</li>
+                                        <li>{{wanzamiOriginalFilm.category.name}}</li>
                                     </ul>
                                 </div>
                                 <div class="options">
@@ -1872,13 +525,13 @@
                                         and fast-forward through your DVR content. Access endless entertainment.
                                     </p>
                                     <div class="d-lg-flex align-items-center gap-2 pt-2 mb-lg-0 mb-4">
-                                        <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="border-radius-50 hl-btn btn-base small-btn fs-18 fw-light text-uppercase flex-shrink-0">
+                                        <a href="#" target="_blank" class="border-radius-50 hl-btn btn-base small-btn fs-18 fw-light text-uppercase flex-shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
                                                 <path d="M16.4408 7.22358C16.3198 7.31809 14.1836 8.52991 14.1836 11.2245C14.1836 14.3412 16.9019 15.4438 16.9832 15.4711C16.9707 15.5383 16.5514 16.9812 15.5501 18.4513C14.6572 19.745 13.7247 21.0367 12.3061 21.0367C10.8875 21.0367 10.5225 20.2071 8.88485 20.2071C7.28896 20.2071 6.72153 21.064 5.42395 21.064C4.12638 21.064 3.22099 19.8668 2.18001 18.3967C0.974225 16.6703 0 13.9884 0 11.4429C0 7.36009 2.63687 5.19478 5.23203 5.19478C6.61096 5.19478 7.76042 6.10627 8.62617 6.10627C9.45019 6.10627 10.7353 5.14017 12.304 5.14017C12.8986 5.14017 15.0348 5.19478 16.4408 7.22358ZM11.5593 3.4117C12.2081 2.63672 12.667 1.56141 12.667 0.486107C12.667 0.336992 12.6545 0.185777 12.6274 0.0639648C11.5718 0.103869 10.3159 0.771736 9.55867 1.65592C8.96412 2.33639 8.40921 3.4117 8.40921 4.50171C8.40921 4.66552 8.43633 4.82934 8.44885 4.88185C8.5156 4.89445 8.62408 4.90915 8.73256 4.90915C9.67967 4.90915 10.8708 4.27069 11.5593 3.4117Z" fill="currentColor"/>
                                             </svg>
                                             <span>Apps Store</span>
                                         </a>
-                                        <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="border-radius-50 hl-btn trans-btn small-btn fs-18 fw-light text-uppercase flex-shrink-0">
+                                        <a href="#" target="_blank" class="border-radius-50 hl-btn trans-btn small-btn fs-18 fw-light text-uppercase flex-shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
                                                 <path d="M0.500002 20.1165V20.1156L0.500002 1.01253C0.500002 1.01249 0.500002 1.01236 0.500002 1.01233C0.500066 0.910857 0.530615 0.810752 0.589244 0.724242C0.591074 0.721542 0.59293 0.718858 0.59481 0.71619L10.6741 10.564L0.594806 20.4127C0.592763 20.4099 0.59075 20.407 0.588767 20.404C0.530201 20.3178 0.49981 20.2178 0.500002 20.1165ZM6.11951 17.868L12.1357 11.9917L13.7395 13.5582L6.11951 17.868ZM13.5974 10.564L15.5924 8.61627L18.2277 10.1073C18.3124 10.1553 18.3812 10.2233 18.4285 10.3034C18.4756 10.3835 18.5 10.4733 18.5 10.564C18.5 10.6547 18.4756 10.7445 18.4285 10.8245L18.8591 11.0785L18.4285 10.8245C18.3813 10.9045 18.3125 10.9725 18.2279 11.0205C18.2279 11.0205 18.2278 11.0206 18.2277 11.0206L15.5914 12.5117L13.5974 10.564ZM6.11837 3.25886L13.7405 7.56871L12.1357 9.13624L6.11837 3.25886Z" stroke="white"/>
                                             </svg>
@@ -1896,18 +549,6 @@
             </main>
             <!-- End Main -->
 
-            <div>{{ message }} {{getFullName()}} {{ getCopyright() }}
-
-                <h2>Users List</h2>
-                <ul>
-                    <li v-for="user in users" :key="user.id">
-                        <strong>{{ user.username }}</strong> - {{ user.email }} ({{ user.role }})
-                    </li>
-                </ul>
-                <button @click="getItems">Fetch Users</button>
-            </div>
-            
-        
             <!-- footer area start -->
             <footer class="footer-area footer-area--two pt-60">  
                 <div class="hl-container">
@@ -1916,10 +557,10 @@
                         <div class="col-lg-5 text-lg-start text-center">
                             <div class="footer-widget">
                                 <ul class="footer-widget--list d-inline-block lh-1">
-                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="pricing.html" class="footer-widget--link">Account & Billing</a></li>
-                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="pricing.html" class="footer-widget--link">Pricing Plan</a></li>
+                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="about.html" class="footer-widget--link">About</a></li>
+                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="faq.html" class="footer-widget--link">FAQ</a></li>
                                     <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="privacy-policy.html" class="footer-widget--link">Privacy Policy</a></li>
-                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="faq.html" class="footer-widget--link">Terms of Use</a></li>
+                                    <li class="footer-widget--item inline-style d-inline-block mb-md-0 mb-2"><a href="privacy-policy.html#2" class="footer-widget--link">Terms of Use</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1982,7 +623,7 @@
                         </div>
                         <div class="col-sm-6 footer-widget text-center text-sm-end">
                             <ul class="footer-widget--list">
-                                <li class="footer-widget--item d-inline-block me-4"><a href="privacy-policy-2.html" class="footer-widget--link">Privacy Policy</a></li>
+                                <li class="footer-widget--item d-inline-block me-4"><a href="privacy-policy.html" class="footer-widget--link">Privacy Policy</a></li>
                                 <li class="footer-widget--item d-inline-block"><a href="#" class="footer-widget--link">Site Maps</a></li>
                             </ul>
                         </div>

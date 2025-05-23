@@ -9304,3 +9304,15 @@ body.rtl {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.thumbnailImage{
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);  /* Soft shadow */
+  transition: transform 0.3s ease;
+}
+
+.thumbnailImage:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);  /* Soft shadow */
+  border-radius: 25px;
+  transform: scale(1.03);   /* Optional: slight zoom on hover */
+}

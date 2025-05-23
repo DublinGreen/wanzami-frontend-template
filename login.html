@@ -107,7 +107,7 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"></path>
                                 <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"></path>
                             </svg>
-                            <span>Signup Now</span>
+                            <span> Register Now</span>
                         </a>
                         <button id="navigation-button" class="menu-button menu menu_btn d-lg-none border-0 bg-transparent">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
@@ -301,33 +301,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="footer-widget">
-                            <h4 class="widget-title text-uppercase lh-1">Browse categories</h4>
-                            <ul class="footer-widget--list d-inline-block">
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Action</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Comedy</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Crime</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Romance</a></li>
-                            </ul>
-                            <ul class="footer-widget--list d-inline-block ms-5">
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Family</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Animation</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Drama</a></li>
-                                <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Scientific</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="col-md-6 col-lg-2">
-                        <div class="footer-widget">
-                            <h4 class="widget-title text-uppercase lh-1">Help</h4>
-                            <ul class="footer-widget--list">
-                                <li class="footer-widget--item"><a href="about.html" class="footer-widget--link">About Us</a></li>
-                                <li class="footer-widget--item"><a href="pricing.html" class="footer-widget--link">Pricing Plan</a></li>
-                                <li class="footer-widget--item"><a href="privacy-policy.html" class="footer-widget--link">Privacy Policy</a></li>
-                                <li class="footer-widget--item"><a href="faq.html" class="footer-widget--link">Faq</a></li>
-                                <li class="footer-widget--item"><a href="pricing.html" class="footer-widget--link">Account & Billing</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="col-md-6 col-xl-3">
                         <div class="footer-widget widget-more">
@@ -366,108 +341,23 @@
         <!-- footer area end -->
      </section>
 
-    <!-- Script JS -->
-    <script src="assets/js/vendor/jquery.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/fontawesome.min.js"></script>
-    <script src="assets/js/vendor/magnefic.min.js"></script>
-    <script src="assets/js/vendor/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/constants.js"></script>
-    <script src="assets/js/vue/commons.js"></script>
-    <script src="assets/js/graphql/query.js"></script>
-    <script src="assets/js/graphql/mutation.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Vue and application scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="assets/js/constants.js"></script>
+        <script src="assets/js/graphql/query.js"></script>
+        <script src="assets/js/graphql/mutation.js"></script>
+        <script src="assets/js/vue/commons.js"></script>
+        <script src="assets/js/vue/init.js"></script>
+        <script src="assets/js/vue/login.js"></script>
 
-    <script>
-
-        function mySubmit(e) { 
-            e.preventDefault(); 
-        }
-        
-        const { createApp, ref, onMounted } = Vue;
-
-        createApp({
-            setup() {
-                const footerCopyright = getFooterDate(APP);
-                const email = ref('');
-                const password = ref('');
-                const passwordVisibility = ref(false);
-                const showWarning = ref(false);
-                const redirect = ref(true);
-
-                const tooglePasswordVisibility = () => {
-                    if(passwordVisibility.value ){
-                        passwordVisibility.value = false;
-                    }else{
-                        passwordVisibility.value = true;
-                    }
-                }
-
-                const login = () => {
-                    sendLoginRequest(email.value,password.value);
-                }
-
-                async function sendLoginRequest(email, password) {
-                    const query = LoginUserMutation;
-
-                    const variables = {
-                        email,
-                        password
-                    };
-
-                    try {
-                        const response = await fetch(AUTH_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            // Add any authorization headers if needed
-                        },
-                        body: JSON.stringify({
-                            query,
-                            variables
-                        })
-                        });
-
-                        const result = await response.json();
-
-                        if (result.errors) {
-                            showWarning.value = true;
-                        } else {
-                            const token = result.data?.login;
-
-                            if(token){
-                                localStorage.setItem("token", token);
-                                localStorage.setItem("email", email);
-                                if(redirect.value){
-                                    checkIfTokenIsSet();
-                                }
-                            }else{
-                                showWarning.value = true;
-                            } 
-                        }
-                    } catch (err) {
-                        console.error('Network error:', err);
-                    }
-                }
-
-                onMounted(() => {
-                    checkIfTokenIsSet();
-                });
-
-                return {
-                    footerCopyright,
-                    email,
-                    password,
-                    passwordVisibility,
-                    tooglePasswordVisibility,
-                    login,
-                    showWarning,
-                };
-            }
-        }).mount('#appVue');
-
-    </script>
+        <!-- Script JS -->
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+        <script src="assets/js/vendor/fontawesome.min.js"></script>
+        <script src="assets/js/vendor/jquery.min.js"></script>
+        <script src="assets/js/vendor/magnefic.min.js"></script>
+        <script src="assets/js/vendor/swiper-bundle.min.js"></script>
+        <script src="assets/js/main.js"></script>
 </body>
 
 </html>
