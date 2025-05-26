@@ -19,8 +19,8 @@ mutation ConfirmEmailCode($code: String!, $id: Int!) {
 `;
 
 const PasswordResetRequestMutation = `
-mutation PasswordReset($email: String!) {
-    passwordReset(email: $email)
+mutation PasswordResetRequest($email: String!) {
+    passwordResetRequest(email: $email)
 }
 `;
 

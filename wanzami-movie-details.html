@@ -54,15 +54,38 @@
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center gap-3">
-                                    <video id="myVideo" controls autoplay preload="metadata" style="display: none">
+                                    <video id="myTrailer" controls autoplay preload="metadata" style="display: none">
                                         Your browser does not support the video tag.
                                     </video>
-                                    <button class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playFullscreen()">
+                                    <button class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playTrailerFullscreen()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
                                             <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                         <span class="pt-0">Play Trailer</span>
                                     </button>
+                                    <video id="myMovie" controls autoplay preload="metadata" style="display: none">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <button class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playMovieFullscreen()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
+                                            <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span class="pt-0">Play Movie</span>
+                                    </button>
+                                    <button onclick="payWithPaystack()">Pay Now</button>
+                                    <a href="#" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
+                                            <path d="M0 11.0526H8.09524V12.6316H0V11.0526ZM0 5.52632H16.1905V7.10526H0V5.52632ZM0 0H16.1905V1.57895H0V0ZM12.9524 11.0526V8.68421H14.5714V11.0526H17V12.6316H14.5714V15H12.9524V12.6316H10.5238V11.0526H12.9524Z" fill="currentColor"/>
+                                        </svg>
+                                        <span class="pt-0">Add to List</span>
+                                    </a>
+                                    <a href="#" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path opacity="0.4" d="M4.63861 6.35272H3.90348C2.30007 6.35272 1 7.65279 1 9.2562L1 13.0973C1 14.6999 2.30007 16 3.90348 16H12.673C14.2764 16 15.5765 14.6999 15.5765 13.0973V9.24833C15.5765 7.64964 14.2804 6.35272 12.6817 6.35272H11.9387" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M8.28809 0.999977V10.4873" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M5.99121 3.30725L8.28799 1.00023L10.5856 3.30725" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-3 align-self-xl-end">
@@ -107,7 +130,7 @@
                 <!-- Start Main Navigation Bar -->
                 <div class="container nav-container position-absolute top-0 start-50 translate-middle-x lh-1">
                     <div class="d-flex align-items-center justify-content-between pt-lg-0 pb-lg-0 pt-4 pb-4">
-                        <a  href="index.html" class="main-logo me-lg-5 flex-shrink-0">
+                        <a  href="dashboard.html" class="main-logo me-lg-5 flex-shrink-0">
                             <img src="assets/images/logo.png" alt="img">
                         </a>
                         <div class="nav-right-part nav-right-part-desktop d-inline-flex align-item-center ps-md-5 ps-3">
@@ -134,7 +157,7 @@
                         <div class="menu__top">
                             <div class="menu_header d-flex align-items-center justify-content-between">
                                 <div class="logo">
-                                    <a class="main-logo me-lg-5 me-4" href="index.html">
+                                    <a class="main-logo me-lg-5 me-4" href="dashboard.html">
                                         <img src="assets/images/logo.svg" alt="img">
                                     </a>
                                 </div>
@@ -451,8 +474,59 @@
     <script src="assets/js/graphql/query.js"></script>
     <script src="assets/js/graphql/mutation.js"></script>
     <script src="assets/js/vue/commons.js"></script>
-    <script src="assets/js/vue/init.js"></script>
-    <script src="assets/js/vue/movie-details.js"></script>
+    <script src="assets/js/vue/checkAuth.js"></script>
+    <script src="assets/js/vue/wanzami-movie-details.js"></script>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+
+    function payWithPaystack(){
+        // alert(JSON.stringify(priceCollection));
+        // alert(priceCollection[0]['currency']);
+        
+        var handler = PaystackPop.setup({
+            key: PAYSTACK_KEY, // Replace with your public key
+            email: localStorage.getItem('email'),
+            amount: priceCollection[0]['price'] * 100, // Amount in kobo (i.e. ₦5000)
+            currency: priceCollection[0]['currency'],
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+            callback: function(response){
+                // Send `response.reference` to your backend to verify
+                alert('Payment successful. Reference: ' + response.reference);
+                
+                let serverResponse = verifyPaymentReference(VerifyPaymentRequest,{"reference": response.reference});
+                serverResponse
+                .then(result => {
+                    const parsed = parseDoubleEncodedJson(result.data.verifyPayment);
+                    console.log(JSON.stringify(parsed));
+
+                    if(parsed.status){
+                        alert(parsed.status);
+                        alert(parsed.data.domain);
+                        alert(parsed.data.reference);
+                        alert(parsed.data.amount);
+                        alert(parsed.data.gateway_response);
+                        alert(response.reference);
+                        alert(priceCollection[0]['currency']);
+                        alert(priceCollection[0]['price']);
+                    }
+                    // alert(result.data.verifyPayment);
+                    // alert(result.data.verifyPayment.data.reference);
+                    // alert(result.data.verifyPayment.data.amount);
+                    // alert(result.data.verifyPayment.data.gateway_response);
+                    // alert(result.data.verifyPayment.data.currency);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            },
+            onClose: function(){
+                alert('Transaction was not completed, window closed.');
+            }
+        });
+        handler.openIframe();
+        }
+    </script>
     
     <!-- Script JS -->
     <script src="assets/js/vendor/jquery.min.js"></script>

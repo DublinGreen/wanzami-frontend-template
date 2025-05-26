@@ -9,6 +9,7 @@ createApp({
         const footerCopyright = getFooterDate(APP);
         const password = ref('');
         const passwordConfirm = ref('');
+        const showWarning = ref(false);
 
         const passwordReset = () => {
             if(password.value !== passwordConfirm.value){
@@ -80,6 +81,7 @@ createApp({
             password,
             passwordConfirm,
             passwordReset,
+            showWarning,
         };
     }
 }).mount('#appVue');

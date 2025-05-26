@@ -57,7 +57,6 @@ query FindAllActiveSliders {
                 id
                 video_length
                 video_quanlity
-                video_url
                 video_trailer_url
             }
         }
@@ -101,7 +100,6 @@ query FindAllVideoByRestrictedCountry ($country: String!) {
             id
             video_length
             video_quanlity
-            video_url
             video_trailer_url
         }
     }
@@ -173,6 +171,34 @@ query UserByEmail($email: String!) {
 }
 `;
 
+const VideoProductionCrewByVideoIdQuery = `
+query VideoProductionCrewByVideoId($videoId: ID!) {
+    videoProductionCrewByVideoId(id: $videoId) {
+        id
+        status
+        position
+        name
+    }
+}
+`;
+
+const VideoCastByVideoIdQuery = `
+query VideoCastByVideoId($videoId: ID!) {
+    videoCastByVideoId(videoId: $videoId) {
+        id
+        status
+        videoId
+        cast {
+            id
+            status
+            cast_image_url
+            name
+            gender
+        }
+    }
+}
+`;
+
 const VideoByIdQuery = `
 query VideoById($videoId: ID!) {
     videoById(id: $videoId) {
@@ -212,5 +238,33 @@ query VideoById($videoId: ID!) {
             video_trailer_url
         }
     }
+}
+`;
+
+const GeneratePresignedGetUrlQuery = `
+query GeneratePresignedGetUrl($fileName: String!) {
+    generatePresignedGetUrl(fileName: $fileName)
+}
+`;
+
+const VideoPriceByVideoIdQuery = `
+query VideoPriceByVideoId($videoId: ID!) {
+    videoPriceByVideoId(videoId: $videoId) {
+        id
+        status
+        videoId
+        price {
+            id
+            status
+            price
+            currency
+        }
+    }
+}
+`;
+
+const VerifyPaymentRequest = `
+query VerifyPayment($reference: String!) {
+    verifyPayment(reference: $reference)
 }
 `;

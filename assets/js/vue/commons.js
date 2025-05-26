@@ -10,6 +10,44 @@ const checkIfTokenIsSet = () => {
     }
 }
 
+const parseDoubleEncodedJson = (str) => {
+    try {
+        const onceParsed = JSON.parse(str);
+        const twiceParsed = typeof onceParsed === 'string' ? JSON.parse(onceParsed) : onceParsed;
+        return twiceParsed;
+    } catch (error) {
+        console.error("Failed to parse JSON:", error.message);
+        return null;
+    }
+}
+
+// Function to call GraphQL API
+const verifyPaymentReference = async (query, variables = {}) => {
+    let token = localStorage.getItem("token");
+
+    const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            query,
+            variables,
+        }),
+    });
+
+    return response.json();
+};
+
+const checkIfUserIsLoggedIn = () => {
+    let token = localStorage.getItem("token");
+    if(!token){
+        window.location.href = "index.html";
+    }
+}
+
 async function getUserLocation(googleApiKey) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(

@@ -1,12 +1,12 @@
 
-const GRAPHQL_ENDPOINT = AUTH_URL;
-
 const { createApp, ref, onMounted } = Vue;
 
 var trailer = "";
+var movieGeneratePresignedGetUrl = "";
+var priceCollection = [];
 
-function playFullscreen() {
-    const video = document.getElementById('myVideo');
+function playTrailerFullscreen() {
+    const trailerVideo = document.getElementById('myTrailer');
     const shortVideo = document.getElementById('shortVideo');
     var videoSrc = "";
 
@@ -14,31 +14,66 @@ function playFullscreen() {
         videoSrc = trailer
 
         // Show the video
-        video.style.display = 'block';
+        trailerVideo.style.display = 'block';
 
         // HLS support
-        if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
+        if (trailerVideo.canPlayType('application/vnd.apple.mpegurl')) {
+            trailerVideo.src = videoSrc;
         } else if (Hls.isSupported()) {
             const hls = new Hls();
             hls.loadSource(videoSrc);
-            hls.attachMedia(video);
+            hls.attachMedia(trailerVideo);
         } else {
             console.error('HLS is not supported in this browser.');
             return;
         }
 
         // Request fullscreen
-        const requestFullscreen = video.requestFullscreen || video.webkitRequestFullscreen || video.msRequestFullscreen;
+        const requestFullscreen = trailerVideo.requestFullscreen || trailerVideo.webkitRequestFullscreen || trailerVideo.msRequestFullscreen;
         if (requestFullscreen) {
-            requestFullscreen.call(video);
+            requestFullscreen.call(trailerVideo);
         }
 
         // Play video
         shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
-        video.play().catch(err => console.error('Video playback failed:', err));
+        trailerVideo.play().catch(err => console.error('Trailer Video playback failed:', err));
     }
 
+}
+
+function playMovieFullscreen(){
+    const movieVideo = document.getElementById('myMovie');
+    const shortVideo = document.getElementById('shortVideo');
+    var videoSrc = "";
+
+    if(movieGeneratePresignedGetUrl != ""){
+        videoSrc = movieGeneratePresignedGetUrl
+
+        // Show the video
+        movieVideo.style.display = 'block';
+
+        // HLS support
+        if (movieVideo.canPlayType('application/vnd.apple.mpegurl')) {
+            movieVideo.src = videoSrc;
+        } else if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(movieVideo);
+        } else {
+            console.error('HLS is not supported in this browser.');
+            return;
+        }
+
+        // Request fullscreen
+        const requestFullscreen = movieVideo.requestFullscreen || movieVideo.webkitRequestFullscreen || movieVideo.msRequestFullscreen;
+        if (requestFullscreen) {
+            requestFullscreen.call(movieVideo);
+        }
+
+        // Play video
+        shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
+        movieVideo.play().catch(err => console.error('Main Video playback failed:', err));
+    }
 }
 
 // Hide video when fullscreen is exited
@@ -47,12 +82,21 @@ document.addEventListener('webkitfullscreenchange', handleFullscreenExit); // Sa
 document.addEventListener('msfullscreenchange', handleFullscreenExit); // IE/Edge
 
 function handleFullscreenExit() {
-    const video = document.getElementById('myVideo');
+    const trailerVideo = document.getElementById('myTrailer');
+    const movieVideo = document.getElementById('myMovie');
+    const shortVideo = document.getElementById('shortVideo');
+
     const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
     if (!isFullscreen) {
-        video.pause();
-        video.style.display = 'none';
+        trailerVideo.pause();
+        trailerVideo.style.display = 'none';
+
+        movieVideo.pause();
+        movieVideo.style.display = 'none';
+
+        shortVideo.play().catch(err => console.error('short Video playback failed:', err));
+        shortVideo.muted = true;
     }
 }
 
@@ -69,6 +113,8 @@ createApp({
         const newestRealeasesFilms = ref();
         const productionCrew = ref();
         const casts = ref();
+        const prices = ref();
+        const generatePresignedGetUrl = ref();
 
         const getCopyright = () => {
             return `${footerCopyRight.value}`;
@@ -86,11 +132,14 @@ createApp({
 
         // Function to call GraphQL API
         const fetchGraphQL = async (query, variables = {}) => {
-            const response = await fetch(AUTH_URL, {
+            let token = localStorage.getItem("token");
+
+            const response = await fetch(URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     query,
@@ -114,14 +163,70 @@ createApp({
                 trailer = film.value.videoMeta?.video_trailer_url;
 
                 console.log("GraphQL Response Film Data:", data);
-                // console.log(JSON.stringify(film.value));
-                // alert(JSON.stringify(film.value.videoMeta.video_length));
+
+                if(film.value){
+                    generatePresignedGetUrlRequest(film.value.videoMeta.video_url);
+                    getPricesByVideoIdRequest(videoId);
+                }
             } catch (error) {
                 console.error("GraphQL Error:", error);
             }
 
             return "";
         };
+
+
+        const generatePresignedGetUrlRequest = async (fileName) => {
+            const query = GeneratePresignedGetUrlQuery;
+
+            const variables = {
+                fileName
+            };
+
+            try {
+                const data = await fetchGraphQL(query, variables);
+                generatePresignedGetUrl.value = data.data.generatePresignedGetUrl;
+                movieGeneratePresignedGetUrl = generatePresignedGetUrl.value;
+                console.log("GraphQL Response generatePresignedGetUrlRequest Data:", data);
+            } catch (error) {
+                console.error("GraphQL Error:", error);
+            }
+
+            return "";
+        };
+        
+        const getPricesByVideoIdRequest = async (videoId) => {
+            const query = VideoPriceByVideoIdQuery;
+
+            const variables = {
+                videoId
+            };
+
+            try {
+                const data = await fetchGraphQL(query, variables);
+                prices.value = data.data.videoPriceByVideoId;
+                
+                let pricesObj = prices.value;
+                if(pricesObj){
+                    pricesObj.forEach(function(item) {
+                        if(item.status == 1){
+                            priceCollection.push({
+                                currency: item.price.currency,
+                                price: item.price.price
+                            });
+                        }
+                    });
+                }
+
+                // console.log(priceCollection);
+                console.log("GraphQL Response Video Prices Data:", data);
+            } catch (error) {
+                console.error("GraphQL Error:", error);
+            }
+
+            return "";
+        };
+
 
         const getProductionCrew = async (videoId) => {
             const query = VideoProductionCrewByVideoIdQuery;
@@ -178,7 +283,6 @@ createApp({
 
         // Fetch data when component mounts
         onMounted(() => {
-            checkIfTokenIsSet();
             getCountry();
             const urlParams = new URLSearchParams(window.location.search);
             ia.value = urlParams.get('ia');
@@ -193,6 +297,7 @@ createApp({
         return {
             country,
             appName,
+            prices,
             getCopyright,
             film,
             productionCrew,

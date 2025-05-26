@@ -27,7 +27,7 @@
                  :style="{ backgroundImage: 'url(' + film.banner + ')' }"
                 >
                     <div class="thumb">
-                        <video id="shortVideo" :src="film.video_short_url" class="" autoplay loop></video>
+                        <video :src="film.video_short_url" class="" autoplay loop></video>
                     </div>
                     <div class="content container position-absolute bottom-0 start-50 translate-middle-x mb-60">
                         <div class="row justify-content-between">
@@ -54,15 +54,26 @@
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center gap-3">
-                                    <video id="myVideo" controls autoplay preload="metadata" style="display: none">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <button class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playFullscreen()">
+                                    <a href="assets/video/video.mp4" class="popup_video hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
                                             <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                        <span class="pt-0">Play Trailer</span>
-                                    </button>
+                                        <span class="pt-0">Watch Now</span>
+                                    </a>
+                                    <button onclick="payWithPaystack()">Pay Now</button>
+                                    <a href="#" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
+                                            <path d="M0 11.0526H8.09524V12.6316H0V11.0526ZM0 5.52632H16.1905V7.10526H0V5.52632ZM0 0H16.1905V1.57895H0V0ZM12.9524 11.0526V8.68421H14.5714V11.0526H17V12.6316H14.5714V15H12.9524V12.6316H10.5238V11.0526H12.9524Z" fill="currentColor"/>
+                                        </svg>
+                                        <span class="pt-0">Add to List</span>
+                                    </a>
+                                    <a href="#" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path opacity="0.4" d="M4.63861 6.35272H3.90348C2.30007 6.35272 1 7.65279 1 9.2562L1 13.0973C1 14.6999 2.30007 16 3.90348 16H12.673C14.2764 16 15.5765 14.6999 15.5765 13.0973V9.24833C15.5765 7.64964 14.2804 6.35272 12.6817 6.35272H11.9387" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M8.28809 0.999977V10.4873" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M5.99121 3.30725L8.28799 1.00023L10.5856 3.30725" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-3 align-self-xl-end">
@@ -110,13 +121,72 @@
                         <a  href="index.html" class="main-logo me-lg-5 flex-shrink-0">
                             <img src="assets/images/logo.png" alt="img">
                         </a>
+                        <nav class="navbar-nav m-auto d-lg-inline-block d-none">
+                            <ul class="main-menu d-flex">
+                                <li class="menu-item menu-item-has-children">
+                                    <a href="index.html" class="menu-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                            <path opacity="0.4" d="M6.57373 12.3083H11.4266" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3704C1 5.8656 1.51241 6.18 4.27061 3.728C5.47737 2.7968 7.35509 1 8.97662 1C10.5973 1 12.5126 2.788 13.7302 3.728C16.4884 6.18 17 5.8656 17 10.3704C17 17 15.3651 17 8.99999 17C2.63489 17 1 17 1 10.3704Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item-has-children">
+                                    <a href="#" class="menu-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 25 19" fill="none">
+                                            <path opacity="0.4" d="M17.4746 7.01366C19.685 5.26138 22.6513 3.56637 23.2124 4.17336C24.14 5.16975 24.0599 14.6526 23.2124 15.5573C22.697 16.1185 19.7078 14.4235 17.4746 12.6828" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.07617 9.8567C1.07617 3.61268 3.15026 1.53174 9.3748 1.53174C15.5982 1.53174 17.6723 3.61268 17.6723 9.8567C17.6723 16.0995 15.5982 18.1817 9.3748 18.1817C3.15026 18.1817 1.07617 16.0995 1.07617 9.8567Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span>My Movies</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8481 19.2405C23.5122 19.2405 24.0506 18.7021 24.0506 18.038C24.0506 17.3738 23.5122 16.8354 22.8481 16.8354H1.20253C0.538392 16.8354 0 17.3738 0 18.038C0 18.7021 0.538392 19.2405 1.20253 19.2405H22.8481ZM22.8481 10.8228C23.5122 10.8228 24.0506 10.2844 24.0506 9.62025C24.0506 8.95611 23.5122 8.41772 22.8481 8.41772H13.2278C12.5637 8.41772 12.0253 8.95611 12.0253 9.62025C12.0253 10.2844 12.5637 10.8228 13.2278 10.8228H22.8481ZM22.8481 2.40506C23.5122 2.40506 24.0506 1.86667 24.0506 1.20253C24.0506 0.538392 23.5122 0 22.8481 0H13.2278C12.5637 0 12.0253 0.538392 12.0253 1.20253C12.0253 1.86667 12.5637 2.40506 13.2278 2.40506H22.8481Z" fill="white"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 2.77086C0 1.82635 1.03893 1.25053 1.83987 1.75112L7.98866 5.59411C8.74225 6.0651 8.74225 7.16261 7.98866 7.6336L1.83987 11.4766C1.03893 11.9772 0 11.4014 0 10.4568V2.77086ZM2.40506 6.61385C2.40506 7.3423 3.20632 7.78639 3.82404 7.40032C4.40524 7.03707 4.40524 6.19063 3.82404 5.82739C3.20632 5.44132 2.40506 5.88541 2.40506 6.61385Z" fill="white" fill-opacity="0.4"></path>
+                                        </svg>
+                                        <span>My Wishlist</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                         <div class="nav-right-part nav-right-part-desktop d-inline-flex align-item-center ps-md-5 ps-3">
+                            <div class="position-relative d-inline-block">
+                                <div class="search ms-auto">
+                                    <button class="bg-transparent border-0 header_search_btn close">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5111 11.6277C10.5016 12.6081 9.12422 13.2117 7.60587 13.2117C4.50983 13.2117 2 10.7019 2 7.60587C2 4.50983 4.50983 2 7.60587 2C10.7019 2 13.2117 4.50983 13.2117 7.60587C13.2117 9.12422 12.6081 10.5016 11.6277 11.5111L11.5111 11.6277ZM11.91 12.6172C10.7539 13.611 9.25005 14.2117 7.60587 14.2117C3.95755 14.2117 1 11.2542 1 7.60587C1 3.95755 3.95755 1 7.60587 1C11.2542 1 14.2117 3.95755 14.2117 7.60587C14.2117 9.25005 13.611 10.7539 12.6172 11.91L15.8865 15.1793L15.1793 15.8865L11.91 12.6172Z" fill="currentColor"></path>
+                                            <path d="M11.5111 11.6277L11.8594 11.9864L11.8646 11.9813L11.5111 11.6277ZM11.6277 11.5111L11.9813 11.8647L11.9864 11.8594L11.6277 11.5111ZM11.91 12.6172L12.2636 12.2636L11.9357 11.9357L11.5841 12.238L11.91 12.6172ZM12.6172 11.91L12.238 11.5841L11.9357 11.9357L12.2636 12.2636L12.6172 11.91ZM15.8865 15.1793L16.24 15.5329L16.5936 15.1793L16.24 14.8258L15.8865 15.1793ZM15.1793 15.8865L14.8258 16.24L15.1793 16.5936L15.5329 16.24L15.1793 15.8865ZM7.60587 13.7117C9.25945 13.7117 10.7604 13.0537 11.8594 11.9864L11.1627 11.269C10.2428 12.1624 8.98898 12.7117 7.60587 12.7117V13.7117ZM1.5 7.60587C1.5 10.978 4.23369 13.7117 7.60587 13.7117V12.7117C4.78597 12.7117 2.5 10.4258 2.5 7.60587H1.5ZM7.60587 1.5C4.23369 1.5 1.5 4.23369 1.5 7.60587H2.5C2.5 4.78597 4.78597 2.5 7.60587 2.5V1.5ZM13.7117 7.60587C13.7117 4.23369 10.978 1.5 7.60587 1.5V2.5C10.4258 2.5 12.7117 4.78597 12.7117 7.60587H13.7117ZM11.9864 11.8594C13.0537 10.7604 13.7117 9.25945 13.7117 7.60587H12.7117C12.7117 8.98898 12.1624 10.2428 11.269 11.1627L11.9864 11.8594ZM11.8646 11.9813L11.9813 11.8646L11.2742 11.1575L11.1575 11.2742L11.8646 11.9813ZM7.60587 14.7117C9.37412 14.7117 10.9926 14.0652 12.236 12.9963L11.5841 12.238C10.5152 13.1569 9.12599 13.7117 7.60587 13.7117V14.7117ZM0.5 7.60587C0.5 11.5303 3.6814 14.7117 7.60587 14.7117V13.7117C4.23369 13.7117 1.5 10.978 1.5 7.60587H0.5ZM7.60587 0.5C3.6814 0.5 0.5 3.6814 0.5 7.60587H1.5C1.5 4.23369 4.23369 1.5 7.60587 1.5V0.5ZM14.7117 7.60587C14.7117 3.6814 11.5303 0.5 7.60587 0.5V1.5C10.978 1.5 13.7117 4.23369 13.7117 7.60587H14.7117ZM12.9963 12.236C14.0652 10.9926 14.7117 9.37412 14.7117 7.60587H13.7117C13.7117 9.12599 13.1569 10.5152 12.238 11.5841L12.9963 12.236ZM12.2636 12.2636L15.5329 15.5329L16.24 14.8258L12.9707 11.5565L12.2636 12.2636ZM15.5329 14.8258L14.8258 15.5329L15.5329 16.24L16.24 15.5329L15.5329 14.8258ZM15.5329 15.5329L12.2636 12.2636L11.5565 12.9707L14.8258 16.24L15.5329 15.5329Z" fill="#fff"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Search Box -->
+                                <div class="header_search_box position-absolute end-0">
+                                    <form class="single_form header_search_form d-flex align-items-center">
+                                        <input type="text" name="s" placeholder="Search query..." required="" class="search" autofocus="">
+                                        <button type="submit" class="d-flex align-items-center justify-content-center">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1376_579)">
+                                                <path d="M23.707 22.293L17.738 16.324C19.3647 14.3346 20.1644 11.7961 19.9719 9.23357C19.7793 6.67103 18.6092 4.28053 16.7036 2.55652C14.798 0.832514 12.3026 -0.0931045 9.73367 -0.0288727C7.16472 0.0353591 4.71873 1.08453 2.90164 2.90162C1.08455 4.71871 0.035382 7.1647 -0.0288498 9.73365C-0.0930816 12.3026 0.832537 14.798 2.55655 16.7036C4.28056 18.6092 6.67106 19.7793 9.23359 19.9718C11.7961 20.1644 14.3346 19.3646 16.324 17.738L22.293 23.707C22.4816 23.8892 22.7342 23.99 22.9964 23.9877C23.2586 23.9854 23.5094 23.8802 23.6948 23.6948C23.8803 23.5094 23.9854 23.2586 23.9877 22.9964C23.99 22.7342 23.8892 22.4816 23.707 22.293ZM10 18C8.41778 18 6.87106 17.5308 5.55546 16.6518C4.23987 15.7727 3.21449 14.5233 2.60899 13.0615C2.00349 11.5997 1.84506 9.99113 2.15374 8.43928C2.46243 6.88743 3.22435 5.46197 4.34317 4.34315C5.46199 3.22433 6.88746 2.4624 8.4393 2.15372C9.99115 1.84504 11.5997 2.00347 13.0615 2.60897C14.5233 3.21447 15.7727 4.23985 16.6518 5.55544C17.5308 6.87103 18 8.41775 18 10C17.9976 12.121 17.154 14.1545 15.6543 15.6542C14.1545 17.154 12.121 17.9976 10 18Z" fill="#E82B4B"></path>
+                                                </g>
+                                                <defs>
+                                                <clipPath id="clip0_1376_579">
+                                                <rect width="24" height="24" fill="white"></rect>
+                                                </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>  
                             <a href="login.html" class="hl-btn btn-base text-uppercase d-xl-inline-block d-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0918 0.681633C9.49771 -0.227206 8.14931 -0.227215 7.55522 0.681633L4.55572 5.27005L2.26304 3.97109C1.11443 3.32031 -0.266602 4.34018 0.0445324 5.6094L1.60213 11.9633C1.67226 12.2494 1.93203 12.4509 2.23065 12.4509H15.4163C15.715 12.4509 15.9748 12.2494 16.0449 11.9633L17.6025 5.6094C17.9137 4.34017 16.5326 3.32032 15.384 3.97109L13.0913 5.27005L10.0918 0.681633ZM9.00466 1.3719C8.91986 1.24207 8.72716 1.24207 8.64236 1.3719L5.30994 6.46957C5.12341 6.75493 4.74268 6.84607 4.4441 6.67693L1.61851 5.07604C1.45442 4.98308 1.25713 5.12877 1.30158 5.31008L2.73965 11.1764H14.9074L16.3455 5.31008C16.3898 5.12877 16.1926 4.98308 16.0285 5.07604L13.2029 6.67693C12.9043 6.84607 12.5236 6.75493 12.3371 6.46957L9.00466 1.3719Z" fill="currentColor"></path>
                                     <path d="M2.7884 13.7254C2.43128 13.7254 2.14178 14.0108 2.14178 14.3628C2.14178 14.7147 2.43128 15 2.7884 15H14.8584C15.2155 15 15.505 14.7147 15.505 14.3628C15.505 14.0108 15.2155 13.7254 14.8584 13.7254H2.7884Z" fill="currentColor"></path>
                                 </svg>
-                                <span> Login</span>
+                                <span>GreenDevNG</span>
                             </a>
                             <button id="navigation-button" class="menu-button menu menu_btn d-lg-none border-0 bg-transparent">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
@@ -134,7 +204,7 @@
                         <div class="menu__top">
                             <div class="menu_header d-flex align-items-center justify-content-between">
                                 <div class="logo">
-                                    <a class="main-logo me-lg-5 me-4" href="index.html">
+                                    <a class="main-logo me-lg-5 me-4" href="index-2.html">
                                         <img src="assets/images/logo.svg" alt="img">
                                     </a>
                                 </div>
@@ -293,13 +363,13 @@
                                     <div class="thumb">
                                         <img :src="newestRealeasesFilm.thumbnail" :alt="newestRealeasesFilm.name" class="w-100">
                                     </div>
-                                    <a :href="`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="video-play-btn position-absolute">
+                                    <a :href=`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}` class="video-play-btn position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
                                             <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
                                         </svg>
                                     </a>
                                     <div class="details details-two position-absolute">
-                                        <h4 class="movie-name text-uppercase"><a :href="`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
+                                        <h4 class="movie-name text-uppercase"><a :href=`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}` class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
                                         <ul class="movie-info">
                                             <li>
                                                 <img src="assets/images/icons/card/star-fill.svg" alt="star">
@@ -394,12 +464,28 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="footer-widget">
+                                <h4 class="widget-title text-uppercase lh-1">Browse categories</h4>
+                                <ul class="footer-widget--list d-inline-block">
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Action</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Comedy</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Crime</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Romance</a></li>
+                                </ul>
+                                <ul class="footer-widget--list d-inline-block ms-5">
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Family</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Animation</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Drama</a></li>
+                                    <li class="footer-widget--item"><a href="category.html" class="footer-widget--link">Scientific</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="col-md-6 col-lg-2">
                             <div class="footer-widget">
                                 <h4 class="widget-title text-uppercase lh-1">Help</h4>
                                 <ul class="footer-widget--list">
                                     <li class="footer-widget--item"><a href="about.html" class="footer-widget--link">About Us</a></li>
+                                    <li class="footer-widget--item"><a href="pricing.html" class="footer-widget--link">Pricing Plan</a></li>
                                     <li class="footer-widget--item"><a href="privacy-policy.html" class="footer-widget--link">Privacy Policy</a></li>
                                     <li class="footer-widget--item"><a href="faq.html" class="footer-widget--link">Faq</a></li>
                                 </ul>
@@ -432,7 +518,7 @@
                         </div>
                         <div class="col-sm-6 footer-widget text-sm-end">
                             <ul class="footer-widget--list">
-                                <li class="footer-widget--item d-inline-block mb-0 me-4"><a href="privacy-policy.html" class="footer-widget--link">Privacy Policy</a></li>
+                                <li class="footer-widget--item d-inline-block mb-0 me-4"><a href="#" class="footer-widget--link">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
@@ -444,7 +530,6 @@
     </section>
 
     <!-- Vue and application scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="assets/js/constants.js"></script>
@@ -453,7 +538,27 @@
     <script src="assets/js/vue/commons.js"></script>
     <script src="assets/js/vue/init.js"></script>
     <script src="assets/js/vue/movie-details.js"></script>
-    
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+    function payWithPaystack(){
+        var handler = PaystackPop.setup({
+            key: 'pk_test_472a1f94c9759dfbe5088d1d891ea2a6d402179e', // Replace with your public key
+            email: 'customer@email.com',
+            amount: 5000 * 100, // Amount in kobo (i.e. ₦5000)
+            currency: "NGN",
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1),
+            callback: function(response){
+                // Send `response.reference` to your backend to verify
+                alert('Payment successful. Reference: ' + response.reference);
+            },
+            onClose: function(){
+                alert('Transaction was not completed, window closed.');
+            }
+        });
+        handler.openIframe();
+        }
+    </script>
+
     <!-- Script JS -->
     <script src="assets/js/vendor/jquery.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>

@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Wanzami</title>
-        <title>Wanzami Home</title>
         <meta name="description" content="Built for storytellers. Powered by community. Designed for the world. Wanzami is a bold pay-per-view streaming platform redefining access and monetisation for African filmmakers. No subscriptions. No gatekeepers. Just original stories—available on demand and on your terms. Born from the need to disrupt outdated systems that limit creative and financial freedom, Wanzami offers a fresh, user-friendly ecosystem where creators are empowered and audiences are in control. Filmmakers earn from day one, and viewers only pay for what they choose to watch.">
         <meta name="keywords" content="Wanzami, wanzami home, wanzami entertainment, wanzami app, wanzami streaming app, african movies">
 
@@ -274,11 +273,11 @@
                             <!-- Single Small Movie Card -->
                             <div class="swiper-slide" v-for="film in films" :key="film.id">
                                 <div class="movie-card-small style-two">
-                                    <a href="#" class="thumb d-inline-block">
+                                    <a :href="`movie-details.html?na=${encodeURIComponent(film.name)}&ia=${encodeURIComponent(film.id)}&ca=${encodeURIComponent(country)}`" class="thumb d-inline-block">
                                         <img :src="film.thumbnail" :alt="film.name" class="thumbnailImage">
                                     </a>
                                     <div class="details details-two text-center m-0 pb-0">
-                                        <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{film.name}}</a></h4>
+                                        <h4 class="movie-name text-uppercase"><a :href=`movie-details.html?na=${encodeURIComponent(film.name)}&ia=${encodeURIComponent(film.id)}&ca=${encodeURIComponent(country)}` class="gradient-link">{{film.name}}</a></h4>
                                         <ul class="movie-info">
                                             <li>
                                                 <img src="assets/images/icons/card/star-fill.svg" alt="star">
@@ -333,13 +332,13 @@
                                 <div class="thumb">
                                     <img :src="newestRealeasesFilm.thumbnail" :alt="newestRealeasesFilm.name" class="w-100">
                                 </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
+                                <a :href="`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="video-play-btn position-absolute">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
                                         <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
                                     </svg>
                                 </a>
                                 <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
+                                    <h4 class="movie-name text-uppercase"><a :href=`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}` class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
                                     <ul class="movie-info">
                                         <li>
                                             <img src="assets/images/icons/card/star-fill.svg" alt="star">
@@ -386,7 +385,7 @@
                             <div class="thumb">
                                 <img :src="film.banner" :alt="film.name" class="card-img">
                             </div>
-                            <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
+                            <a :href=`movie-details.html?na=${encodeURIComponent(film.name)}&ia=${encodeURIComponent(film.id)}&ca=${encodeURIComponent(country)}` class="video-play-btn position-absolute">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43" fill="none">
                                     <path d="M35.1842 19.7904C36.467 20.5692 36.467 22.4308 35.1842 23.2096L3.97913 42.1555C2.64629 42.9647 0.941173 42.0052 0.941173 40.4459L0.941175 2.55405C0.941175 0.994777 2.64629 0.0352452 3.97913 0.844472L35.1842 19.7904Z" fill="white"/>
                                 </svg>
@@ -397,7 +396,7 @@
                                     <li class="d-inline-block me-4"><img src="assets/images/icons/certificate-2.webp" alt="certificates"></li>
                                     <li class="d-inline-block"><img src="assets/images/icons/certificate-3.webp" alt="certificates"></li>
                                 </ul>
-                                <h2 class="card-title text-uppercase lh-1"><a href="#" class="gradient-link">{{film.name}}</a></h2>
+                                <h2 class="card-title text-uppercase lh-1"><a :href=`movie-details.html?na=${encodeURIComponent(film.name)}&ia=${encodeURIComponent(film.id)}&ca=${encodeURIComponent(country)}` class="gradient-link">{{film.name}}</a></h2>
                                 <ul class="movie-info-list d-flex align-item-center justify-content-center gap-1 gap-lg-2">
                                     <li class="movie-info-list--item style-two radius-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -468,13 +467,13 @@
                                 <div class="thumb">
                                     <img :src="wanzamiOriginalFilm.thumbnail" :alt="wanzamiOriginalFilm.name" class="w-100">
                                 </div>
-                                <a href="assets/video/video.mp4" class="video-play-btn popup_video position-absolute">
+                                <a :href=`movie-details.html?na=${encodeURIComponent(wanzamiOriginalFilm.name)}&ia=${encodeURIComponent(wanzamiOriginalFilm.id)}&ca=${encodeURIComponent(country)}` class="video-play-btn position-absolute">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
                                         <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
                                     </svg>
                                 </a>
                                 <div class="details details-two position-absolute">
-                                    <h4 class="movie-name text-uppercase"><a href="movie-details.html" class="gradient-link">{{wanzamiOriginalFilm.name}}</a></h4>
+                                    <h4 class="movie-name text-uppercase"><a :href=`movie-details.html?na=${encodeURIComponent(wanzamiOriginalFilm.name)}&ia=${encodeURIComponent(wanzamiOriginalFilm.id)}&ca=${encodeURIComponent(country)}` class="gradient-link">{{wanzamiOriginalFilm.name}}</a></h4>
                                     <ul class="movie-info">
                                         <li>
                                             <img src="assets/images/icons/card/star-fill.svg" alt="star">

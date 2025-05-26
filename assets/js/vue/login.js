@@ -25,6 +25,75 @@ createApp({
             sendLoginRequest(email.value,password.value);
         }
 
+        const checkIfEmailConfirmationTokenisSent = () => {
+            const params = new URLSearchParams(window.location.search);
+
+            const code = params.get('code');
+            const id = parseInt(params.get('id'));
+
+            if(params.get('code') != null && params.get('id') != null){
+                Swal.fire({
+                    title: "Confirming Email",
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    timer: 5000,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading(); // This shows the built-in loading spinner
+                    },
+                });
+                sendEmailConfirmationRequest(code,id);
+            }
+        }
+
+        async function sendEmailConfirmationRequest(code, id) {
+            const query = EmailConfirmationMutation;
+
+            const variables = {
+                code,
+                id
+            };
+
+            try {
+                const response = await fetch(AUTH_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query,
+                    variables
+                })
+                });
+
+                const result = await response.json();
+
+                if (result.errors) {
+                    Swal.fire({
+                        title: "Account activation failed",
+                        text: `Account could not be activated. Contact support`,
+                        icon: "warning"
+                    });
+                } else {
+                    const user = result.data?.confirmEmailCode;
+
+                    if(user){
+                        localStorage.setItem("email", user.email);
+
+                        Swal.fire({
+                            title: "Account has been activated!",
+                            text: `${user.email} account has been activated! Login with your email and password!`,
+                            icon: "success"
+                        });
+                    }else{
+                        showWarning.value = true;
+                    } 
+                }
+            } catch (err) {
+                console.error('Network error:', err);
+            }
+        }
+
         async function sendLoginRequest(email, password) {
             const query = LoginUserMutation;
 
@@ -70,6 +139,7 @@ createApp({
 
         onMounted(() => {
             checkIfTokenIsSet();
+            checkIfEmailConfirmationTokenisSent();
         });
 
         return {

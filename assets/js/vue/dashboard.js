@@ -1,23 +1,4 @@
 
-const GRAPHQL_ENDPOINT = AUTH_URL;
-
-// async function fetchGraphQL(query, variables = {}) {
-//     const response = await fetch(GRAPHQL_ENDPOINT, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json",
-//         },
-//         body: JSON.stringify({
-//             query,
-//             variables,
-//         }),
-//     });
-
-//     const result = await response.json();
-//     return result;
-// }
-
 const { createApp, ref, onMounted } = Vue;
 
 createApp({
@@ -57,11 +38,14 @@ createApp({
 
         // Function to call GraphQL API
         const fetchGraphQL = async (query, variables = {}) => {
-            const response = await fetch(AUTH_URL, {
+            let token = localStorage.getItem("token");
+
+            const response = await fetch(URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     query,
@@ -155,7 +139,6 @@ createApp({
 
         // Fetch data when component mounts
         onMounted(() => {
-            checkIfTokenIsSet(),
             getCountry();
             getFilms(localStorage.getItem('country_name'));
             getFilmsNewestRealeases(localStorage.getItem('country_name'),newestRealeasesId.value);
@@ -166,7 +149,6 @@ createApp({
         return {
             country,
             appName,
-            getCountry,
             getCopyright,
             sliders,
             films,
