@@ -13,6 +13,7 @@ createApp({
         const password = ref('');
         const passwordConfirm = ref('');
         const passwordVisibility = ref(false);
+        const emailInUse = ref(false);
         const showWarning = ref(false);
         const redirect = ref(true);
         const message = ref('');
@@ -31,19 +32,22 @@ createApp({
             if(password.value !== passwordConfirm.value){
                 showWarning.value = true;
                 message.value = "Passwords do not match.";
+            }else if(emailInUse.value){
+                message.value = "Email is already in use.";       
+                showWarning.value = true;
+            }else{
+                Swal.fire({
+                    title: "Creating Wanzami Account",
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    timer: 5000,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading(); // This shows the built-in loading spinner
+                    },
+                });
+                sendSignupRequest(firstName.value, lastName.value,email.value,password.value,telephone.value,role.value);
             }
-
-            Swal.fire({
-                title: "Creating Wanzami Account",
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                timer: 5000,
-                showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading(); // This shows the built-in loading spinner
-                },
-            });
-            sendSignupRequest(firstName.value, lastName.value,email.value,password.value,telephone.value,role.value);
         }
 
         async function sendSignupRequest(firstName,lastName, email, password, telephone, role) {
@@ -121,6 +125,7 @@ createApp({
                 if (result.errors) {
                     showWarning.value = true;
                     message.value = "Email already in use.";
+                    emailInUse.value = true;
                 } else {
                     const returnEmail = result.data?.userByEmail?.email;
 
@@ -130,6 +135,7 @@ createApp({
                     }else{
                         showWarning.value = true;
                         message.value = "Email already in use.";
+                        emailInUse.value = true;
                     }
                 }
             } catch (err) {
@@ -138,9 +144,19 @@ createApp({
         }
 
         watch(email, (newEmail, oldEmail) => {
-        if (newEmail && newEmail !== oldEmail) {
-            checkEmailAvailabilityRequest(newEmail);
-        }
+            if (newEmail && newEmail !== oldEmail) {
+                checkEmailAvailabilityRequest(newEmail);
+            }
+        });
+
+        watch([password, passwordConfirm], ([newPass, newConfirm]) => {
+            if (newConfirm && newPass !== newConfirm) {
+                
+                showWarning.value = true;
+                message.value = "Passwords do not match.";
+            }else{
+                showWarning.value = false;
+            }
         });
 
         onMounted(() => {
@@ -159,6 +175,7 @@ createApp({
             signup,
             showWarning,
             message,
+            emailInUse,
         };
     }
 }).mount('#appVue');

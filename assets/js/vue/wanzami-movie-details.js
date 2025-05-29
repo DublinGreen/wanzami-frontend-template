@@ -8,6 +8,7 @@ var priceCollection = [];
 function playTrailerFullscreen() {
     const trailerVideo = document.getElementById('myTrailer');
     const shortVideo = document.getElementById('shortVideo');
+
     var videoSrc = "";
 
     if(trailer != ""){
@@ -114,6 +115,10 @@ createApp({
         const productionCrew = ref();
         const casts = ref();
         const prices = ref();
+        const videoPayments = ref();
+        const canPay = ref(true);
+        const myPlayList = ref();
+        const canAddToPlayList = ref(true);
         const generatePresignedGetUrl = ref();
 
         const getCopyright = () => {
@@ -175,6 +180,62 @@ createApp({
             return "";
         };
 
+        const getMyPlaylist = async () => {
+            const query = WishListByUserEmailQuery;
+            let email = localStorage.getItem('email');
+
+            const variables = {
+                email,
+            };
+
+            try {
+                const data = await fetchGraphQL(query, variables);
+                myPlayList.value = data.data.wishListByUserEmail;
+
+                myPlayList.value.forEach((item) => {
+                    if(item.video.id ==  ia.value ){
+                        canAddToPlayList.value = false;
+                    }
+                });
+        
+                console.log("GraphQL Response myPlayList:", data);
+            } catch (error) {
+                console.error("GraphQL Error:", error);
+            }
+
+        };
+
+        const sendWishListRequest = async (videoId, videoName) => {
+            const query = CreateWishListMutation;
+            let email = localStorage.getItem('email');
+            let video_id = parseInt(videoId);
+
+            const variables = {
+                video_id,
+                email
+            };
+
+            try {
+                const data = await fetchGraphQL(query, variables);
+                let wishData = data.data.createWishList;
+
+                console.log("GraphQL Response Wishlist Data:", data);
+
+                if(wishData.id){                    
+                    Swal.fire({
+                        title: "PlayList updated.",
+                        text: `${videoName} has been added to your playlist!`,
+                        icon: "success"
+                    });
+
+                    canAddToPlayList.value = false;
+                }
+            } catch (error) {
+                console.error("GraphQL Error:", error);
+            }
+
+            return "";
+        };
 
         const generatePresignedGetUrlRequest = async (fileName) => {
             const query = GeneratePresignedGetUrlQuery;
@@ -210,10 +271,12 @@ createApp({
                 if(pricesObj){
                     pricesObj.forEach(function(item) {
                         if(item.status == 1){
-                            priceCollection.push({
-                                currency: item.price.currency,
-                                price: item.price.price
-                            });
+                            if(country.value == item.price.country.name){
+                                priceCollection[country.value] = {
+                                    currency: item.price.currency,
+                                    price: item.price.price
+                                };
+                            }
                         }
                     });
                 }
@@ -281,6 +344,29 @@ createApp({
             }
         };
 
+        const getVideoPaymentsByEmail = async (email) => {
+            const query = VideoPaymentByEmailQuery;
+
+            const variables = {
+                email
+            };
+
+            try {
+                const data = await fetchGraphQL(query, variables);
+                videoPayments.value = data.data.videoPaymentByEmail;
+                
+                videoPayments.value.forEach(videoPayment => {
+                    if(ia.value == videoPayment.video_id){
+                        canPay.value = false;
+                    }
+                });
+
+                console.log("GraphQL Response videoPayments:", data);
+            } catch (error) {
+                console.error("GraphQL Error:", error);
+            }
+        };
+
         // Fetch data when component mounts
         onMounted(() => {
             getCountry();
@@ -292,17 +378,24 @@ createApp({
             getProductionCrew(ia.value);
             getCasts(ia.value);
             getFilmsNewestRealeases(na.value,newestRealeasesId.value);
+            getVideoPaymentsByEmail(localStorage.getItem('email'));
+            getMyPlaylist();
         });
 
         return {
             country,
             appName,
             prices,
+            videoPayments,
+            ia,
+            canPay,
             getCopyright,
             film,
             productionCrew,
             casts,
+            sendWishListRequest,
             newestRealeasesFilms,
+            canAddToPlayList,
         };
     }
 }).mount('#appVue');

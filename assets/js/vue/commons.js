@@ -41,6 +41,26 @@ const verifyPaymentReference = async (query, variables = {}) => {
     return response.json();
 };
 
+// Function to call GraphQL API
+const sendSuccessPaymentLog = async (query, variables = {}) => {
+    let token = localStorage.getItem("token");
+
+    const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            query,
+            variables,
+        }),
+    });
+
+    return response.json();
+};
+
 const checkIfUserIsLoggedIn = () => {
     let token = localStorage.getItem("token");
     if(!token){

@@ -4,6 +4,12 @@ mutation Login($email: String!, $password: String!) {
 }
 `;
 
+const LogoutMutation = `
+mutation Logout($token: String!) {
+    logout(token: $token)
+}
+`;
+
 
 const EmailConfirmationMutation = `
 mutation ConfirmEmailCode($code: String!, $id: Int!) {
@@ -58,3 +64,65 @@ mutation CreateUser(
 }
 `;
 
+
+const CreateVideoPaymentMutation = `
+mutation CreateVideoPayment(
+  $video_id: Int!, 
+  $email: String!, 
+  $reference: String!, 
+  $amount: String!, 
+  $currency: String!, 
+  $transaction_status: String!
+  $channel: String!
+) {
+    createVideoPayment(
+        video_id: $video_id,
+        email: $email,
+        reference: $reference,
+        amount: $amount,
+        currency: $currency,
+        transaction_status: $transaction_status,
+        channel: $channel,
+    ) {
+        id
+        video_id
+        email
+        reference
+        amount
+        currency
+        transaction_status
+    }
+}
+`;
+
+const CreateWishListMutation = `
+mutation CreateWishList($video_id: Int!, $email: String!) {
+    createWishList(video_id: $video_id, email: $email) {
+        id
+        status
+    }
+}
+`;
+
+
+const CreateOrUpdateUserMetaMutation = `
+mutation CreateOrUpdateUserMeta(
+  $email: String!, 
+  $gender: String!, 
+  $day: String!, 
+  $month: String!
+) {
+    createOrUpdateUserMeta(
+        email: $email
+        gender: $gender
+        day: $day
+        month: $month
+    ) {
+        id
+        email
+        gender
+        dayOfBirth
+        monthOfBirth
+    }
+}
+`;

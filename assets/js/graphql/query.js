@@ -258,13 +258,175 @@ query VideoPriceByVideoId($videoId: ID!) {
             status
             price
             currency
+            country {
+                id
+                name
+                status
+            }
         }
     }
 }
 `;
 
-const VerifyPaymentRequest = `
+const VerifyPaymentRequestQuery = `
 query VerifyPayment($reference: String!) {
     verifyPayment(reference: $reference)
+}
+`;
+
+const VideoPaymentByEmailQuery = `
+query VideoPaymentByEmail($email: String!) {
+    videoPaymentByEmail(email: $email) {
+        id
+        video_id
+        email
+        reference
+        amount
+        currency
+        transaction_status
+        channel
+    }
+}
+`;
+
+const SearchVideoByRestrictedCountryQuery = `
+query SearchVideoByRestrictedCountry($country: String!, $videoName: String!) {
+    searchVideoByRestrictedCountry(country: $country, videoName: $videoName) {
+        id
+        status
+        name
+        description
+        short_description
+        thumbnail
+        video_short_url
+        banner
+        reviews_rating
+        category {
+            id
+            name
+            status
+        }
+        author {
+            id
+            name
+            email
+            telephone
+            status
+            age
+        }
+        videoRating {
+            id
+            status
+            rating
+            description
+        }
+        videoMeta {
+            id
+            video_length
+            video_quanlity
+            video_url
+            video_trailer_url
+        }
+    }
+}
+`;
+
+const VideosByIdsQuery = `
+query VideosByIds($ids: [Int!]!) {
+    videosByIds(ids: $ids) {
+        id
+        status
+        name
+        description
+        short_description
+        thumbnail
+        video_short_url
+        banner
+        reviews_rating
+        category {
+            id
+            name
+            status
+        }
+        author {
+            id
+            name
+            email
+            telephone
+            status
+            age
+        }
+        videoRating {
+            id
+            status
+            rating
+            description
+        }
+        videoMeta {
+            id
+            video_length
+            video_quanlity
+            video_url
+            video_trailer_url
+        }
+    }
+}
+`;
+
+const WishListByUserEmailQuery = `
+query WishListByUserEmail($email: String!) {
+    wishListByUserEmail(email: $email) {
+        id
+        status
+        video {
+            id
+            status
+            name
+            description
+            short_description
+            thumbnail
+            video_short_url
+            banner
+            reviews_rating
+            category {
+                id
+                name
+                status
+            }
+            author {
+                id
+                name
+                email
+                telephone
+                status
+                age
+            }
+            videoRating {
+                id
+                status
+                rating
+                description
+            }
+            videoMeta {
+                id
+                video_length
+                video_quanlity
+                video_url
+                video_trailer_url
+            }
+        }
+    }
+}
+`;
+
+const UserMetaByEmailQuery = `
+query UserMetaByEmail($email: String!) {
+    userMetaByEmail(email: $email) {
+        id
+        email
+        gender
+        dayOfBirth
+        monthOfBirth
+    }
 }
 `;
