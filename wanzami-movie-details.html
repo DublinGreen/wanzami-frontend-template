@@ -64,7 +64,7 @@
                                         </svg>
                                         <span class="pt-0">Play Trailer</span>
                                     </button>
-                                    <video id="myMovie" controls autoplay preload="metadata" style="display: none">
+                                    <video id="myMovie" :ic="film.id" controls autoplay preload="metadata" style="display: none">
                                         Your browser does not support the video tag.
                                     </video>
 
@@ -366,13 +366,13 @@
                                     <div class="thumb">
                                         <img :src="newestRealeasesFilm.thumbnail" :alt="newestRealeasesFilm.name" class="w-100">
                                     </div>
-                                    <a :href="`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="video-play-btn position-absolute">
+                                    <a :href="`wanzami-movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="video-play-btn position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
                                             <path d="M14.249 7.49136C15.5132 8.27308 15.5132 10.1118 14.249 10.8935L3.05184 17.8171C1.71942 18.641 -8.29672e-07 17.6826 -7.61272e-07 16.1161L-1.56667e-07 2.2688C-8.8267e-08 0.702239 1.71942 -0.256149 3.05184 0.567735L14.249 7.49136Z" fill="white"/>
                                         </svg>
                                     </a>
                                     <div class="details details-two position-absolute">
-                                        <h4 class="movie-name text-uppercase"><a :href="`movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
+                                        <h4 class="movie-name text-uppercase"><a :href="`wanzami-movie-details.html?na=${encodeURIComponent(newestRealeasesFilm.name)}&ia=${encodeURIComponent(newestRealeasesFilm.id)}&ca=${encodeURIComponent(country)}`" class="gradient-link">{{newestRealeasesFilm.name}}</a></h4>
                                         <ul class="movie-info">
                                             <li>
                                                 <img src="assets/images/icons/card/star-fill.svg" alt="star">

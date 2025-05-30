@@ -38,8 +38,40 @@ function playTrailerFullscreen() {
         // Play video
         shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
         trailerVideo.play().catch(err => console.error('Trailer Video playback failed:', err));
+
     }
 
+}
+
+function isVideoPlaying(video) {
+  return !!(
+    video.currentTime > 0 &&
+    !video.paused &&
+    !video.ended &&
+    video.readyState > 2
+  );
+}
+
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari
+document.addEventListener('mozfullscreenchange', handleFullscreenChange);    // Firefox
+document.addEventListener('MSFullscreenChange', handleFullscreenChange);     // IE/Old Edge
+
+function handleFullscreenChange() {
+  const isFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement;
+
+  if (!isFullscreen) {
+    // ✅ Fullscreen has been exited
+    // Trying to continue playback, after fullscreen has been existed and resumed [Bug]
+    // console.log("fullscreen existed");
+    // const movieVideo = document.getElementById('myMovie');
+    // movieVideo.src = movieGeneratePresignedGetUrl;
+    // movieVideo.load();
+  }
 }
 
 function playMovieFullscreen(){
@@ -72,8 +104,43 @@ function playMovieFullscreen(){
         }
 
         // Play video
-        shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
-        movieVideo.play().catch(err => console.error('Main Video playback failed:', err));
+        if(shortVideo){
+            let isShortVideoPlaying = isVideoPlaying(shortVideo);
+
+            if(isShortVideoPlaying){
+                try{
+                    shortVideo.pause();
+                }catch(err){
+                    console.error('short Video playback failed:', err)
+                }
+            }
+        }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('ia');
+        const videoName = urlParams.get('na');
+
+        // Resume from last saved time
+        movieVideo.addEventListener('loadedmetadata', function onMeta() {
+            const savedTime = localStorage.getItem(`video-progress-${videoId}`);
+            if(savedTime != null | savedTime != ""){
+                movieVideo.currentTime = savedTime;
+                console.log("resume movie");
+                movieVideo.removeEventListener('loadedmetadata', onMeta);
+            }
+        }); 
+
+        movieVideo.addEventListener('canplay', function onCanPlay() {
+            movieVideo.play();
+            movieVideo.removeEventListener('canplay', onCanPlay);
+        });
+            
+        // Save current time regularly
+        movieVideo.addEventListener('timeupdate', () => {
+            localStorage.setItem(`video-progress-${videoId}`, movieVideo.currentTime);
+        });
+
+        // movieVideo.play().catch(err => console.error('Main Video playback failed:', err));
     }
 }
 
