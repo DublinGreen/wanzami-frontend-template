@@ -36,7 +36,7 @@ function playTrailerFullscreen() {
         }
 
         // Play video
-        shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
+        // shortVideo.pause().catch(err => console.error('short Video playback failed:', err));
         trailerVideo.play().catch(err => console.error('Trailer Video playback failed:', err));
 
     }
@@ -109,7 +109,8 @@ function playMovieFullscreen(){
 
             if(isShortVideoPlaying){
                 try{
-                    shortVideo.pause();
+                    shortVideo.muted = true;
+                    // shortVideo.pause();
                 }catch(err){
                     console.error('short Video playback failed:', err)
                 }
@@ -142,6 +143,18 @@ function playMovieFullscreen(){
 
         // movieVideo.play().catch(err => console.error('Main Video playback failed:', err));
     }
+}
+
+function muteShortVideo(){
+    const shortVideo = document.getElementById('shortVideo');
+
+    if (shortVideo.muted) {
+        console.log("Video is muted");
+        shortVideo.muted = false;
+    } else {
+        shortVideo.muted = true;
+        console.log("Video is not muted");
+    }    
 }
 
 // Hide video when fullscreen is exited
