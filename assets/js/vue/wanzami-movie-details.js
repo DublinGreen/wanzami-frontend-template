@@ -5,6 +5,11 @@ var trailer = "";
 var movieGeneratePresignedGetUrl = "";
 var priceCollection = [];
 
+let NoPlaySound =  document.getElementById("NoPlaySound");
+let playSound =  document.getElementById("playSound");
+playSound.style.display = "none";
+NoPlaySound.style.display = "block";
+
 function playTrailerFullscreen() {
     const trailerVideo = document.getElementById('myTrailer');
     const shortVideo = document.getElementById('shortVideo');
@@ -147,13 +152,23 @@ function playMovieFullscreen(){
 
 function muteShortVideo(){
     const shortVideo = document.getElementById('shortVideo');
+    let NoPlaySound =  document.getElementById("NoPlaySound");
+    let playSound =  document.getElementById("playSound");
+    playSound.style.display = "none";
+    NoPlaySound.style.display = "none";
 
     if (shortVideo.muted) {
         console.log("Video is muted");
         shortVideo.muted = false;
+        playSound.style.display = "block";
+        NoPlaySound.style.display = "none";
     } else {
         shortVideo.muted = true;
         console.log("Video is not muted");
+        let playSound =  document.getElementById("playSound");
+        playSound.style.display = "none";
+        NoPlaySound.style.display = "block";
+
     }    
 }
 

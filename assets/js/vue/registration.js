@@ -124,8 +124,8 @@ createApp({
 
                 if (result.errors) {
                     showWarning.value = true;
-                    message.value = "Email already in use.";
-                    emailInUse.value = true;
+                    // message.value = "Email already in use.";
+                    // emailInUse.value = true;
                 } else {
                     const returnEmail = result.data?.userByEmail?.email;
 
@@ -134,8 +134,8 @@ createApp({
                         message.value = "";
                     }else{
                         showWarning.value = true;
-                        message.value = "Email already in use.";
-                        emailInUse.value = true;
+                        // message.value = "Email already in use.";
+                        // emailInUse.value = true;
                     }
                 }
             } catch (err) {

@@ -1,4 +1,4 @@
-const AUTH_URL = 'http://localhost:9085/graphql';
+const AUTH_URL = 'http://wanzami-auth-env.eba-amfpvapk.eu-north-1.elasticbeanstalk.com/graphql';
 const URL = 'http://localhost:8081/graphql';
 const APP = 'WANZAMI'
 const YEAR = '2025';
