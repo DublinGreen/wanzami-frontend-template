@@ -1,4 +1,4 @@
-const AUTH_URL = 'https://auth-api.wanzami.tv/graphql';
+const AUTH_URL = 'https://auth.wanzami.tv/graphql';
 const URL = 'http://localhost:8081/graphql';
 const APP = 'WANZAMI'
 const YEAR = '2025';
