@@ -63,7 +63,6 @@ createApp({
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                 },
-                credentials: "include", // ⬅️ This is critical for sending cookies
                 body: JSON.stringify({
                     query,
                     variables,
