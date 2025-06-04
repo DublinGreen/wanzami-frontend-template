@@ -19,6 +19,9 @@
     </head>
     <body>
         <section id="appVue">
+            <audio id="myAudio" muted>
+                <source src="assets/audio/wanzami.mp3" type="audio/mpeg">
+            </audio>
             <!-- Start Header -->
             <header class="navbar-area position-relative">
                 <!-- Start Breadcrumb Area -->
@@ -200,7 +203,7 @@
                                     <div class="alert alert-warning" role="alert" v-show="showWarning">
                                         {{message}}
                                     </div>
-                                    <form action="#"  onsubmit="return mySubmit(event)">
+                                    <form action="#"  onsubmit="return mySubmit(event)" autocomplete="off">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label class="single-input-field style-border">
@@ -217,7 +220,7 @@
                                             <div class="col-md-6">
                                                 <labe class="single-input-field style-border">
                                                     <span>Email *</span>
-                                                    <input type="email" placeholder="Email" required v-model="email" />
+                                                    <input type="email" placeholder="Email" required v-model="email" autocomplete="off" />
                                                 </label>
                                             </div>
                                             <div class="col-md-6">
@@ -226,7 +229,7 @@
                                             <div class="col-md-6">
                                                 <label class="single-input-field style-border">
                                                     <span>Password *</span>
-                                                    <input :type="passwordVisibility ? 'text' : 'password'" type="password" placeholder="Password" required v-model="password" />
+                                                    <input :type="passwordVisibility ? 'text' : 'password'" type="password" placeholder="Password" autocomplete="off" required v-model="password" />
                                                     <a @click="tooglePasswordVisibility">
                                                         <svg class="input-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M7.11998 9.8316C6.61803 9.33053 6.3125 8.64962 6.3125 7.88579C6.3125 6.3555 7.54511 5.12201 9.07453 5.12201C9.83138 5.12201 10.528 5.42842 11.0212 5.92949" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -242,7 +245,7 @@
                                             <div class="col-md-6">
                                                 <label class="single-input-field style-border">
                                                     <span>Confirm Password *</span>
-                                                    <input :type="passwordVisibility ? 'text' : 'password'" type="password" placeholder="Confirm Password" required  v-model="passwordConfirm" />
+                                                    <input :type="passwordVisibility ? 'text' : 'password'" type="password" placeholder="Confirm Password" autocomplete="off" required  v-model="passwordConfirm" />
                                                     <a @click="tooglePasswordVisibility">
                                                         <svg class="input-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M7.11998 9.8316C6.61803 9.33053 6.3125 8.64962 6.3125 7.88579C6.3125 6.3555 7.54511 5.12201 9.07453 5.12201C9.83138 5.12201 10.528 5.42842 11.0212 5.92949" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

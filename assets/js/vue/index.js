@@ -161,6 +161,25 @@ createApp({
             getFilmsNewestRealeases(localStorage.getItem('country_name'),newestRealeasesId.value);
             getFilmsWanzamiOriginal(localStorage.getItem('country_name'),wanzamiOriginalId.value);
             getSliders();
+
+            window.addEventListener('load', function () {
+                setTimeout(() => {
+                    const audio = document.getElementById('myAudio');
+                    let audioStatus = this.localStorage.getItem("wanzami_audio_landing_played");
+                    audio.muted = false;
+
+                    if(!audioStatus){
+                        audio.play()
+                        .then(() => {
+                            console.log("Audion is playing");
+                            this.localStorage.setItem("wanzami_audio_landing_played",true);
+                        })
+                        .catch((error) => {
+                            console.error("Audio playback failed:", error);
+                        });
+                    }
+                }, 5000);
+            });
         });
 
         return {

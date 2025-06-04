@@ -78,6 +78,7 @@ createApp({
 
                 if (result.errors) {
                     showWarning.value = true;
+                    message.value = "Unable to create account.";
                 } else {
                     const user = result.data?.createUser;
 
@@ -87,6 +88,23 @@ createApp({
                             title: "Account has been created!",
                             text: `Account has been created! Activate account by clicking on the confirmation link sent to ${user.email}`,
                             icon: "success"
+                        });
+
+                        this.email = "";
+                        this.password = "";
+                        this.passwordConfirm = "";
+                        this.firstName = "";
+                        this.lastName = "";
+
+                        const audio = document.getElementById('myAudio');
+                        audio.muted = false;
+
+                        audio.play()
+                        .then(() => {
+                            console.log("Audion is playing");
+                        })
+                        .catch((error) => {
+                            console.error("Audio playback failed:", error);
                         });
                     }else{
                         Swal.fire({
@@ -123,19 +141,17 @@ createApp({
                 const result = await response.json();
 
                 if (result.errors) {
-                    showWarning.value = true;
-                    // message.value = "Email already in use.";
-                    // emailInUse.value = true;
+                    showWarning.value = false;
                 } else {
                     const returnEmail = result.data?.userByEmail?.email;
 
-                    if(returnEmail === undefined){
+                    if(returnEmail){
+                        showWarning.value = true;
+                        message.value = "Email already in use.";
+                        emailInUse.value = true;
+                    }else{
                         showWarning.value = false;
                         message.value = "";
-                    }else{
-                        showWarning.value = true;
-                        // message.value = "Email already in use.";
-                        // emailInUse.value = true;
                     }
                 }
             } catch (err) {
@@ -144,6 +160,10 @@ createApp({
         }
 
         watch(email, (newEmail, oldEmail) => {
+            showWarning.value = false;
+            message.value = "";
+            emailInUse.value = false;
+            
             if (newEmail && newEmail !== oldEmail) {
                 checkEmailAvailabilityRequest(newEmail);
             }

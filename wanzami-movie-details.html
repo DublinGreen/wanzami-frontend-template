@@ -331,11 +331,16 @@
                         <ul class="cast">
                             <li class="cast--item"  v-for="cast in casts" :key="cast.id">
                                 <div class="cast--link text-center">
-                                    <div class="cast--thumb" v-show="cast.cast.gender === 'MALE'">
-                                        <img src="assets/images/cast/cast-1.webp" :alt="cast.cast.name" class="person">
+                                    <div class="cast--thumb" v-if="cast.cast.cast_image_url != '#'">
+                                        <img :src="cast.cast.cast_image_url" :alt="cast.cast.name" class="person">
                                     </div>
-                                    <div class="cast--thumb" v-show="cast.cast.gender === 'FEMALE'">
-                                        <img src="assets/images/cast/cast-2.webp" :alt="cast.cast.name" class="person">
+                                    <div v-if="cast.cast.cast_image_url == '#'">
+                                        <div class="cast--thumb" v-show="cast.cast.gender === 'MALE'">
+                                            <img src="assets/images/cast/cast-1.webp" :alt="cast.cast.name" class="person">
+                                        </div>
+                                        <div class="cast--thumb" v-show="cast.cast.gender === 'FEMALE'">
+                                            <img src="assets/images/cast/cast-2.webp" :alt="cast.cast.name" class="person">
+                                        </div>
                                     </div>
                                     <h4 class="cast--name text-uppercase gradient-link">{{cast.cast.name}}</h4>
                                 </div>

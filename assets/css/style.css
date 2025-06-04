@@ -9115,7 +9115,7 @@ body.rtl {
 }
 .rtl .mobile_menu_nav .menu-item-has-children::after {
   right: auto;
-  left: 0;
+  left: 0;Stream or download hit series, movies and more. Plus watch every Premier League match live on mobile.
 }
 .rtl .mobile_menu_nav .menu-item-has-children.show::after {
   right: auto;
@@ -9315,4 +9315,47 @@ body.rtl {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);  /* Soft shadow */
   border-radius: 25px;
   transform: scale(1.03);   /* Optional: slight zoom on hover */
+}
+
+.wanzami-banner{
+  background-image: url('../images/slider.png');
+  background-size: cover;  
+  background-position: center; 
+  background-repeat: no-repeat;
+  /* background-size: 100%; */
+  /* transition: background-size 0.5s ease; */
+  background-position: 35% 60%;
+}
+
+.rounded-shadow {
+  border-radius: 50px;       /* Makes the corners rounded */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Adds soft shadow */
+  padding: 20px;             /* Optional: space inside the div */
+  background-color: #101010;    /* Optional: white background */
+}
+
+.circle-gradient {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 80%,
+    rgba(0, 0, 0, 0.5) 100%);
+}
+
+.wanzami-banner::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.25) 60%,
+    transparent 100%
+  );
+  z-index: -1;
 }

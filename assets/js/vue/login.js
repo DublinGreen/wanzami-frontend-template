@@ -125,6 +125,9 @@ createApp({
                     if(token){
                         localStorage.setItem("token", token);
                         localStorage.setItem("email", email);
+
+                        email.value = "";
+                        password.value = "";
                         if(redirect.value){
                             checkIfTokenIsSet();
                         }
