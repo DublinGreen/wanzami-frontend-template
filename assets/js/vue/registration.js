@@ -18,7 +18,6 @@ createApp({
         const redirect = ref(true);
         const message = ref('');
         const role = ref('NORMAL');
-        const telephone = ref('');
 
         const tooglePasswordVisibility = () => {
             if(passwordVisibility.value ){
@@ -46,11 +45,11 @@ createApp({
                         Swal.showLoading(); // This shows the built-in loading spinner
                     },
                 });
-                sendSignupRequest(firstName.value, lastName.value,email.value,password.value,telephone.value,role.value);
+                sendSignupRequest(firstName.value, lastName.value,email.value,password.value,role.value);
             }
         }
 
-        async function sendSignupRequest(firstName,lastName, email, password, telephone, role) {
+        async function sendSignupRequest(firstName,lastName, email, password, role) {
             const query = CreateUserMutation;
 
             const variables = {
@@ -58,7 +57,6 @@ createApp({
                 lastName,
                 email,
                 password,
-                telephone,
                 role
             };
 

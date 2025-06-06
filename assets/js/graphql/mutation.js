@@ -42,7 +42,6 @@ mutation CreateUser(
   $lastName: String!, 
   $email: String!, 
   $password: String!, 
-  $telephone: String!, 
   $role: String!
 ) {
   createUser(
@@ -50,7 +49,6 @@ mutation CreateUser(
     lastName: $lastName, 
     email: $email, 
     password: $password, 
-    telephone: $telephone, 
     role: $role
   ) {
     id
@@ -58,7 +56,6 @@ mutation CreateUser(
     firstName
     lastName
     email
-    telephone
     role
   }
 }

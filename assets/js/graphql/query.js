@@ -5,7 +5,6 @@ query FindAllUsers {
         status
         username
         email
-        telephone
         password
         role
     }
@@ -43,7 +42,6 @@ query FindAllActiveSliders {
                 id
                 name
                 email
-                telephone
                 status
                 age
             }
@@ -86,7 +84,6 @@ query FindAllVideoByRestrictedCountry ($country: String!) {
             id
             name
             email
-            telephone
             status
             age
         }
@@ -140,7 +137,6 @@ query FindVideoByRestrictedCountryAndSubCategory($country: String!, $videoCatego
             id
             name
             email
-            telephone
             status
             age
         }
@@ -220,7 +216,6 @@ query VideoById($videoId: ID!) {
             id
             name
             email
-            telephone
             status
             age
         }
@@ -310,7 +305,6 @@ query SearchVideoByRestrictedCountry($country: String!, $videoName: String!) {
             id
             name
             email
-            telephone
             status
             age
         }
@@ -352,7 +346,6 @@ query VideosByIds($ids: [Int!]!) {
             id
             name
             email
-            telephone
             status
             age
         }
@@ -397,7 +390,6 @@ query WishListByUserEmail($email: String!) {
                 id
                 name
                 email
-                telephone
                 status
                 age
             }
