@@ -103,6 +103,7 @@ createApp({
                 films.value = data.data.findAllVideoByRestrictedCountry;
                 console.log("GraphQL Response Films:", data);
             } catch (error) {
+                location.reload();
                 console.error("GraphQL Error:", error);
             }
         };

@@ -41,6 +41,33 @@ function playFullscreen() {
 
 }
 
+let NoPlaySound =  document.getElementById("NoPlaySound");
+let playSound =  document.getElementById("playSound");
+playSound.style.display = "none";
+NoPlaySound.style.display = "block";
+
+function muteShortVideo(){
+    const shortVideo = document.getElementById('shortVideo');
+    let NoPlaySound =  document.getElementById("NoPlaySound");
+    let playSound =  document.getElementById("playSound");
+    playSound.style.display = "none";
+    NoPlaySound.style.display = "none";
+
+    if (shortVideo.muted) {
+        console.log("Video is muted");
+        shortVideo.muted = false;
+        playSound.style.display = "block";
+        NoPlaySound.style.display = "none";
+    } else {
+        shortVideo.muted = true;
+        console.log("Video is not muted");
+        let playSound =  document.getElementById("playSound");
+        playSound.style.display = "none";
+        NoPlaySound.style.display = "block";
+
+    }    
+}
+
 // Hide video when fullscreen is exited
 document.addEventListener('fullscreenchange', handleFullscreenExit);
 document.addEventListener('webkitfullscreenchange', handleFullscreenExit); // Safari

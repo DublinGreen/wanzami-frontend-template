@@ -6,8 +6,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Wanzami Movie Details</title>
         <meta name="robots" content="noindex, follow">
-        <meta name="description" content="Built for storytellers. Powered by community. Designed for the world. Wanzami is a bold pay-per-view streaming platform redefining access and monetisation for African filmmakers. No subscriptions. No gatekeepers. Just original stories—available on demand and on your terms. Born from the need to disrupt outdated systems that limit creative and financial freedom, Wanzami offers a fresh, user-friendly ecosystem where creators are empowered and audiences are in control. Filmmakers earn from day one, and viewers only pay for what they choose to watch.">
-        <meta name="keywords" content="Wanzami, wanzami movie, wanzami movie details">
+        <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- Favicon -->
@@ -54,15 +53,17 @@
                                         <span>{{film.videoMeta?.video_quanlity}}</span>
                                     </li>
                                 </ul>
-
                                 <div class="d-flex align-items-center gap-3">
-                                    <a href="registration.html" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
+                                    <video id="myVideo" controls autoplay preload="metadata" style="display: none">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <button class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playFullscreen()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
                                             <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                        <span class="pt-0">Create An Account</span>
-                                    </a>
-                                    
+                                        <span class="pt-0">Play Trailer</span>
+                                    </button>
+
                                     <a onclick="muteShortVideo()" href="#" class="hl-btn lh-1 trans-btn fs-18 fw-medium flex-shrink-0 text-uppercase">
                                         <svg id="playSound" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-volume-up-fill" viewBox="0 0 16 16">
                                             <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z"/>
