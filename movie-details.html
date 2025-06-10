@@ -258,7 +258,7 @@
                         <h3 class="section-title text-center pb-1 mb-4">Cast</h3>
                         <ul class="cast">
                             <li class="cast--item"  v-for="cast in casts" :key="cast.id">
-                                <div class="cast--link text-center">
+                                <div class="cast--link text-center" v-if="cast.cast.cast_image_url != '#'">
                                     <div class="cast--thumb" v-if="cast.cast.cast_image_url != '#'">
                                         <img :src="cast.cast.cast_image_url" :alt="cast.cast.name" class="person">
                                     </div>
