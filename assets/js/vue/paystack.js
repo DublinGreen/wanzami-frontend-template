@@ -18,6 +18,7 @@ function payWithPaystack(){
         callback: function(response){
             // Send `response.reference` to your backend to verify
             // alert('Payment successful. Reference: ' + response.reference);
+            console.log("response: " + JSON.stringify(response));
             
             let serverResponse = verifyPaymentReference(VerifyPaymentRequestQuery,{"reference": response.reference});
             serverResponse
