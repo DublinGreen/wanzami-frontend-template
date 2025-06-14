@@ -122,6 +122,16 @@ createApp({
                 } else {
                     const token = result.data?.login;
 
+                    if(token === "Account not activated."){
+                        Swal.fire({
+                            title: "Account not activated",
+                            text: "Please check your email for the activation link.",
+                            icon: "warning"
+                        });
+                        return;
+
+                    }
+
                     if(token){
                         localStorage.setItem("token", token);
                         localStorage.setItem("email", email);
