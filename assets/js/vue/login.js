@@ -129,9 +129,8 @@ createApp({
                             icon: "warning"
                         });
 
-                        localStorage.setItem("token", "");
-                        localStorage.setItem("email", "");
-
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('email');
                         return;
 
                     }
