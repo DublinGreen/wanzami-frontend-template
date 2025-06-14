@@ -128,6 +128,10 @@ createApp({
                             text: "Please check your email for the activation link.",
                             icon: "warning"
                         });
+
+                        localStorage.setItem("token", "");
+                        localStorage.setItem("email", "");
+
                         return;
 
                     }
