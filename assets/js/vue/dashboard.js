@@ -17,6 +17,15 @@ createApp({
         const wanzamiOriginalFilms = ref([]);
         const country = ref();
 
+        const mobileAppAlert = () => {
+            Swal.fire({
+                title: 'Mobile App Coming Soon',
+                text: 'We are working on a mobile app for Wanzami. Stay tuned!',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
         // Define a method to get full name
         const getFullName = () => {
             return `${firstname.value} ${lastname.value}`;
@@ -155,6 +164,7 @@ createApp({
             filmsSubCategory,
             newestRealeasesFilms,
             wanzamiOriginalFilms,
+            mobileAppAlert
         };
     }
 }).mount('#appVue');

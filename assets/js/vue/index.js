@@ -41,6 +41,16 @@ createApp({
             return `${firstname.value} ${lastname.value}`;
         };
 
+        const mobileAppAlert = () => {
+            Swal.fire({
+                title: 'Mobile App Coming Soon',
+                text: 'We are working on a mobile app for Wanzami. Stay tuned!',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
+
         const getCopyright = () => {
             return `${footerCopyRight.value}`;
         }
@@ -148,9 +158,17 @@ createApp({
             try {
                 const data = await fetchGraphQL(query);
                 sliders.value = data.data.findAllActiveSliders;                
-                console.log("GraphQL Response Sliders:", data);                    
+                console.log("GraphQL Response Sliders:", data);
+                localStorage.removeItem('reloaded');                    
             } catch (error) {
                 console.error("GraphQL Error:", error);
+                if (!localStorage.getItem('reloaded')) {
+                    localStorage.setItem('reloaded', 'true');
+                    location.reload();
+                } else {
+                    // Clear the flag so future visits can reload again if needed
+                    localStorage.removeItem('reloaded');
+                }
             }
         };
 
@@ -193,6 +211,7 @@ createApp({
             filmsSubCategory,
             newestRealeasesFilms,
             wanzamiOriginalFilms,
+            mobileAppAlert,
         };
     }
 }).mount('#appVue');
