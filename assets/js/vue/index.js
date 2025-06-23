@@ -112,9 +112,17 @@ createApp({
                 const data = await fetchGraphQL(query, variables);
                 films.value = data.data.findAllVideoByRestrictedCountry;
                 console.log("GraphQL Response Films:", data);
+                localStorage.removeItem('reloaded');                    
             } catch (error) {
-                // location.reload();
                 console.error("GraphQL Error:", error);
+
+                if (!localStorage.getItem('reloaded')) {
+                    localStorage.setItem('reloaded', 'true');
+                    location.reload();
+                } else {
+                    // Clear the flag so future visits can reload again if needed
+                    localStorage.removeItem('reloaded');
+                }
             }
         };
 
@@ -159,16 +167,8 @@ createApp({
                 const data = await fetchGraphQL(query);
                 sliders.value = data.data.findAllActiveSliders;                
                 console.log("GraphQL Response Sliders:", data);
-                localStorage.removeItem('reloaded');                    
             } catch (error) {
                 console.error("GraphQL Error:", error);
-                if (!localStorage.getItem('reloaded')) {
-                    localStorage.setItem('reloaded', 'true');
-                    location.reload();
-                } else {
-                    // Clear the flag so future visits can reload again if needed
-                    localStorage.removeItem('reloaded');
-                }
             }
         };
 
