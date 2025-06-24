@@ -1,5 +1,10 @@
 function payWithPaystack(){
-    let country = localStorage.getItem('country_name') || '*';
+    let country = localStorage.getItem('country_name');
+
+    if(country != "Nigeria"){
+        country = "*";
+    }
+
     let status = null;
     let reference = null;
     let currency = null;
