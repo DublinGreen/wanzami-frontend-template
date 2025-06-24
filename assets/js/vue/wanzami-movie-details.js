@@ -371,6 +371,11 @@ createApp({
                                     currency: item.price.currency,
                                     price: item.price.price
                                 };
+                            }else {
+                                priceCollection['*'] = {
+                                    currency: item.price.currency,
+                                    price: item.price.price
+                                };
                             }
                         }
                     });
