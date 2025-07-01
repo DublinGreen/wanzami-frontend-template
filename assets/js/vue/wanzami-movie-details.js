@@ -172,6 +172,28 @@ function muteShortVideo(){
     }    
 }
 
+function getHelp(){
+    const SUPPORT_EMAIL = "info@wanzami.tv";
+    Swal.fire({
+        title: "Need Help.",
+        text: 'Need help? Please contact us at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>',
+        html: `Need help? Please contact us at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>`,
+        showCloseButton: true,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText: 'Close',
+        confirmButtonAriaLabel: 'Close',
+        cancelButtonText: 'Cancel',
+        cancelButtonAriaLabel: 'Cancel',
+        reverseButtons: true,
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+        allowEnterKey: true,
+        showLoaderOnConfirm: false,
+        icon: "info"
+    });  
+}
+
 // Hide video when fullscreen is exited
 document.addEventListener('fullscreenchange', handleFullscreenExit);
 document.addEventListener('webkitfullscreenchange', handleFullscreenExit); // Safari
@@ -496,6 +518,7 @@ createApp({
             sendWishListRequest,
             newestRealeasesFilms,
             canAddToPlayList,
+
         };
     }
 }).mount('#appVue');
