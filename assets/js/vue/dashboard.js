@@ -6,7 +6,7 @@ createApp({
         const message = ref('Hello Vue!');
         const firstname = ref('Ria');
         const lastname = ref('Singh');
-        const footerCopyRight = ref(getFooterDate(APP));
+        const footerCopyRight = ref(getFooterDate(LEGAL_NAME));
         const appName = ref(APP);
         const films = ref([]); // Store films data
         const filmsSubCategory = ref([]); // Store films subCategory data

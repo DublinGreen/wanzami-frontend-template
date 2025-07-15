@@ -7,7 +7,7 @@ const { createApp, ref, onMounted } = Vue;
 
 createApp({
     setup() {
-        const footerCopyRight = ref(getFooterDate(APP));
+        const footerCopyRight = ref(getFooterDate(LEGAL_NAME));
         const appName = ref(APP);
         const films = ref([]); // Store films data
         const newestRealeasesFilms = ref([]);

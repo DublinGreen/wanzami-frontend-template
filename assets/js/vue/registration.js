@@ -6,7 +6,7 @@ const { createApp, ref, onMounted, watch } = Vue;
 
 createApp({
     setup() {
-        const footerCopyright = getFooterDate(APP);
+        const footerCopyright = getFooterDate(LEGAL_NAME);
         const firstName = ref('');
         const lastName = ref('');
         const email = ref('');

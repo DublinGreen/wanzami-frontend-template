@@ -1,6 +1,6 @@
-const getFooterDate = (appName) => {
+const getFooterDate = (legalName) => {
     const dateObj = new Date();
-    return `© ${appName}  ${dateObj.getFullYear()}` ;
+    return `© ${dateObj.getFullYear()} ${legalName}.  All rights reserved.` ;
 }
 
 const checkIfTokenIsSet = () => {

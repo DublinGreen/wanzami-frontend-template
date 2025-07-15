@@ -85,7 +85,7 @@ function handleFullscreenExit() {
 
 createApp({
     setup() {
-        const footerCopyRight = ref(getFooterDate(APP));
+        const footerCopyRight = ref(getFooterDate(LEGAL_NAME));
         const appName = ref(APP);
         const film = ref([]); // Store film data
         const country = ref();

@@ -2,7 +2,7 @@ const { createApp, ref, onMounted } = Vue;
 
 createApp({
     setup() {
-        const footerCopyright = getFooterDate(APP);
+        const footerCopyright = getFooterDate(LEGAL_NAME);
 
         onMounted(() => {
         });

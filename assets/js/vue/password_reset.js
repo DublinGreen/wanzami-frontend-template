@@ -6,7 +6,7 @@ const { createApp, ref, onMounted } = Vue;
 
 createApp({
     setup() {
-        const footerCopyright = getFooterDate(APP);
+        const footerCopyright = getFooterDate(LEGAL_NAME);
         const password = ref('');
         const passwordConfirm = ref('');
         const showWarning = ref(false);
