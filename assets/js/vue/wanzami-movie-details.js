@@ -242,6 +242,15 @@ createApp({
             return `${footerCopyRight.value}`;
         }
 
+        const mobileAppAlert = () => {
+            Swal.fire({
+                title: 'Mobile App Coming Soon',
+                text: 'We are working on a mobile app for Wanzami. Stay tuned!',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
         const getCountry = () => {
             let temp = localStorage.getItem('country_name');
             if(temp){
@@ -518,7 +527,7 @@ createApp({
             sendWishListRequest,
             newestRealeasesFilms,
             canAddToPlayList,
-
+            mobileAppAlert
         };
     }
 }).mount('#appVue');
