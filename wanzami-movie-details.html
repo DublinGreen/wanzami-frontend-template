@@ -68,7 +68,7 @@
                                         Your browser does not support the video tag.
                                     </video>
 
-                                    <button v-show="canPay" onclick="payWithPaystack()" class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playTrailerFullscreen()">
+                                    <button v-show="canPay" onclick="pickPayment()" class="hl-btn lh-1 gradient-btn fs-18 fw-bold flex-shrink-0 text-uppercase" onclick="playTrailerFullscreen()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
                                             <path d="M1 2.66967C1 1.90998 1 1.53013 1.16686 1.31807C1.31227 1.13326 1.53485 1.01765 1.77687 1.00119C2.05461 0.982329 2.39036 1.18772 3.06203 1.59855L10.9592 6.42893C11.542 6.78532 11.8335 6.96359 11.934 7.19025C12.022 7.38826 12.022 7.61173 11.934 7.80974C11.8335 8.0364 11.542 8.21467 10.9592 8.57106L3.06203 13.4014C2.39036 13.8123 2.05461 14.0177 1.77687 13.9988C1.53485 13.9824 1.31227 13.8667 1.16686 13.6819C1 13.4699 1 13.0901 1 12.3304V2.66967Z" fill="currentColor" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
@@ -552,6 +552,9 @@
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="assets/js/vue/paystack.js"></script>
 
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script src="assets/js/vue/flutterwave.js"></script>
+
     <!-- Script JS -->
     <script src="assets/js/vendor/jquery.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
@@ -559,5 +562,30 @@
     <script src="assets/js/vendor/magnefic.min.js"></script>
     <script src="assets/js/vendor/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+        const pickPayment = () =>{
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('ia');
+            const videoName = urlParams.get('na');
+
+            Swal.fire({
+                title: "Payment",
+                text: `You are about to pay for ${videoName}. Pick a payment method to continue.`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: '<img src="./assets/images/Paystack.png" style="vertical-align:middle;width: 40px;border-radius: 15px;"> Pay with Paystack',
+                confirmButtonColor: '#06c3f7',
+                cancelButtonColor: '#2a3362',
+                cancelButtonText: '<img src="./assets/images/Flutterwave.png" style="vertical-align:middle;width: 40px;border-radius: 15px;"> Pay with Flutterwave (Coming Soon)',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    payWithPaystack();
+                }else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // payWithFlutterwave();
+                }
+            });
+        }
+    </script>
 </body>
 </html>

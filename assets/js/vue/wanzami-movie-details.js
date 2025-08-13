@@ -527,7 +527,7 @@ createApp({
             sendWishListRequest,
             newestRealeasesFilms,
             canAddToPlayList,
-            mobileAppAlert
+            mobileAppAlert,
         };
     }
 }).mount('#appVue');

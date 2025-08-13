@@ -13,6 +13,7 @@ function payWithPaystack(){
     let channel = null;
     const urlParams = new URLSearchParams(window.location.search);
     let videoId = parseInt(urlParams.get('ia'));
+    let videoName = parseInt(urlParams.get('na'));
 
     var handler = PaystackPop.setup({
         key: PAYSTACK_KEY, // Replace with your public key
