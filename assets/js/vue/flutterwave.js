@@ -4,7 +4,6 @@ function payWithFlutterwave() {
         country = "*";
     }
 
-    // Variables to be set after verification
     let status = null;
     let reference = null;
     let currency = null;
@@ -15,16 +14,15 @@ function payWithFlutterwave() {
 
     const urlParams = new URLSearchParams(window.location.search);
     let videoId = parseInt(urlParams.get('ia'));
-    let videoName = parseInt(urlParams.get('na'));
+    let videoName = urlParams.get('na');
 
-
-    // Generate unique transaction reference (better if backend provides this)
+    // Generate unique transaction reference (your tx_ref)
     let txRef = 'FLW_' + Math.floor((Math.random() * 1000000000) + 1);
 
     FlutterwaveCheckout({
-        public_key: "H6Jbpgq12cTBTgQWxC8m5IYxgE1nD1It", // Replace with your public key
+        public_key: "FLWPUBK-f5a66706c4dc4385078a17169c1c65f6-X", // Replace with your real key
         tx_ref: txRef,
-        amount: priceCollection[country].price, // in currency units, not kobo
+        amount : priceCollection[country].price,
         currency: priceCollection[country].currency,
         payment_options: "card, mobilemoney, ussd",
         customer: {
@@ -33,10 +31,10 @@ function payWithFlutterwave() {
         callback: function (response) {
             console.log("Flutterwave response: ", response);
 
-            // Verify payment from backend
+            // ✅ Use transaction_id for verification
             let serverResponse = verifyPaymentReference(
                 VerifyPaymentRequestQuery,
-                { "reference": response.tx_ref } // tx_ref from Flutterwave
+                { "reference": "FLW_" + response.transaction_id } // numeric id for /verify
             );
 
             serverResponse
@@ -44,15 +42,14 @@ function payWithFlutterwave() {
                     const parsed = parseDoubleEncodedJson(result.data.verifyPayment);
                     console.log("Parsed verification: ", parsed);
 
-                    if (parsed.status) {
+                    if (parsed.status === "success") {
                         status = parsed.status;
                         reference = parsed.data.tx_ref || parsed.data.flw_ref;
                         amount = String(parsed.data.amount);
                         currency = parsed.data.currency;
                         transactionStatus = parsed.data.status;
-                        channel = parsed.data.payment_type || "Unknown";
+                        channel = parsed.data.payment_type || "flutterwave";
 
-                        // Log payment in backend
                         let logResponse = sendSuccessPaymentLog(
                             CreateVideoPaymentMutation,
                             {
@@ -73,6 +70,8 @@ function payWithFlutterwave() {
                             .catch(error => {
                                 console.error("Error logging payment:", error);
                             });
+                    } else {
+                        console.error("Payment not successful:", parsed);
                     }
                 })
                 .catch(error => {

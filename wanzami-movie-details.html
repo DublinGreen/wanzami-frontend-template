@@ -577,12 +577,12 @@
                 confirmButtonText: '<img src="./assets/images/Paystack.png" style="vertical-align:middle;width: 40px;border-radius: 15px;"> Pay with Paystack',
                 confirmButtonColor: '#06c3f7',
                 cancelButtonColor: '#2a3362',
-                cancelButtonText: '<img src="./assets/images/Flutterwave.png" style="vertical-align:middle;width: 40px;border-radius: 15px;"> Pay with Flutterwave (Coming Soon)',
+                cancelButtonText: '<img src="./assets/images/Flutterwave.png" style="vertical-align:middle;width: 40px;border-radius: 15px;"> Pay with Flutterwave',
             }).then((result) => {
                 if (result.isConfirmed) {
                     payWithPaystack();
                 }else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // payWithFlutterwave();
+                    payWithFlutterwave();
                 }
             });
         }
