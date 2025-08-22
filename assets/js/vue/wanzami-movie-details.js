@@ -173,7 +173,7 @@ function muteShortVideo(){
 }
 
 function getHelp(){
-    const SUPPORT_EMAIL = "support@wanzamientertainment.com";
+    const SUPPORT_EMAIL = "email@wanzamientertainment.com";
     Swal.fire({
         title: "Need Help.",
         text: 'Need help? Please contact us at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>',
