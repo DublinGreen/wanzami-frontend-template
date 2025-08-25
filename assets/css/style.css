@@ -7304,7 +7304,37 @@ button.hl-btn:active span {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+    color: var(--primary-color);
+    font-family: var(--body-font);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
 
+.social-btn:hover {
+    background-color: #2a2a2a;
+}
+
+.social-btn .fab {
+    font-size: 20px;
+}
+
+/* This styling is applied inline in the HTML for the divider */
+hr {
+    border-color: #3F3F3F;
+}
+.px-3 {
+    color: var(--paragraph-color);
+}
 .social-btn-inner {
   border-radius: 15px;
   background: #fff;
