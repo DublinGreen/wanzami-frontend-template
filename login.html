@@ -17,10 +17,9 @@
         <link rel="stylesheet" href="assets/css/vendor/magnific.css">
         <link rel="stylesheet" href="assets/css/vendor/swiper-bundle.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
+        <!-- Google Identity Services -->
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MY9L9SV6GK"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -258,19 +257,20 @@
 
                                         <!-- Social Buttons -->
                                         <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <button type="button" class="social-btn">
-                                                    <i class="fab fa-google me-2"></i>
-                                                    Sign up with Google
-                                                </button>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <button type="button" class="social-btn">
-                                                    <i class="fab fa-apple me-2"></i>
-                                                    Sign up with Apple
-                                                </button>
-                                            </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button type="button" @click="triggerGoogleLogin" class="social-btn">
+                                            <i class="fab fa-google me-2"></i>
+                                            Login with Google
+                                            </button>
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button type="button" class="social-btn">
+                                            <i class="fab fa-apple me-2"></i>
+                                            Login with Apple
+                                            </button>
+                                        </div>
+                                        </div>
+
                                 </form>
                             </div>
                         </div>
@@ -373,16 +373,125 @@
         <!-- footer area end -->
      </section>
 
-        <!-- Vue and application scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MY9L9SV6GK"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="assets/js/constants.js"></script>
-        <script src="assets/js/graphql/query.js"></script>
-        <script src="assets/js/graphql/mutation.js"></script>
-        <script src="assets/js/vue/commons.js"></script>
-        <script src="assets/js/vue/init.js"></script>
-        <script src="assets/js/vue/login.js"></script>
+<script>
+const { createApp, ref, onMounted } = Vue; 
+createApp({
+ setup() {
+
+  const email = ref("");
+  const password = ref("");
+  const showWarning = ref(false);
+  const passwordVisibility = ref(false);
+
+  // Toggle password visibility
+  const tooglePasswordVisibility = () => {
+    passwordVisibility.value = !passwordVisibility.value;
+  };
+
+  // --- Google Callback ---
+  const handleCredentialResponse = async (response) => {
+    console.log("Google JWT:", response.credential);
+
+    const graphqlQuery = {
+      query: `
+        mutation SocialLogin($token: String!, $provider: String!) {
+          socialLogin(token: $token, provider: $provider) {
+            token
+            user { id email firstName lastName }
+          }
+        }
+      `,
+      variables: { token: response.credential, provider: "GOOGLE" }
+    };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(graphqlQuery)
+      });
+
+      const result = await res.json();
+      if (result.errors) throw new Error(result.errors[0].message);
+
+      const authPayload = result.data.socialLogin;
+      localStorage.setItem("wanzami_session_token", authPayload.token);
+
+      window.location.href = "/index.html"; //  redirect
+    } catch (err) {
+      alert("Google login failed: " + err.message);
+    }
+  };
+
+  // --- Google Login Trigger ---
+   onMounted(() => {
+        const interval = setInterval(() => {
+            if (typeof window.google !== 'undefined') {
+                clearInterval(interval); // Stop checking once the script is loaded
+                console.log("Google script has loaded, initializing now.");
+                
+                // Now it's safe to initialize
+                google.accounts.id.initialize({
+                    client_id: "666787460270-ftl12tqmc4o12470vbtatg7lgghgusdv.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+            }
+        }, 100); // Check every 100 milliseconds
+    });
+
+    // --- 3. This function now ONLY triggers the popup ---
+    const triggerGoogleLogin = () => {
+        google.accounts.id.prompt(); // The initialization part was moved to onMounted
+    };
+
+
+  // --- Regular login (email/password) ---
+  const login = async () => {
+    const graphqlQuery = {
+      query: `
+        mutation Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+            token
+            user { id email firstName lastName }
+          }
+        }
+      `,
+      variables: { email: email.value, password: password.value }
+    };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(graphqlQuery)
+      });
+
+      const result = await res.json();
+      if (result.errors) throw new Error(result.errors[0].message);
+
+      const authPayload = result.data.login;
+      localStorage.setItem("wanzami_session_token", authPayload.token);
+
+      window.location.href = "/index.html"; //  redirect after login
+    } catch (err) {
+      showWarning.value = true;
+      console.error("Login failed:", err);
+    }
+  };
+
+  //  expose to template
+  return {
+    email, password, showWarning,
+    passwordVisibility, tooglePasswordVisibility,
+    login, triggerGoogleLogin
+  };
+}
+
+}).mount("#appVue");
+</script>
 
         <!-- Script JS -->
         <script src="assets/js/vendor/bootstrap.min.js"></script>
@@ -390,6 +499,7 @@
         <script src="assets/js/vendor/jquery.min.js"></script>
         <script src="assets/js/vendor/magnefic.min.js"></script>
         <script src="assets/js/vendor/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="assets/js/main.js"></script>
 </body>
 

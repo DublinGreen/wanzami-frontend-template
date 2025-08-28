@@ -19,6 +19,11 @@
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-MY9L9SV6GK"></script>
+        <!-- For Apple Sign-In -->
+        <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+
+        <!-- For Google Sign-In -->
+        <script src="https://unpkg.com/vue3-google-oauth2@1.0.6/dist/vue3-google-oauth2.js"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -294,7 +299,7 @@
                                         <!-- Social Buttons -->
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
-                                                <button type="button" class="social-btn">
+                                                <button type="button" @click="handleGoogleLogin" class="social-btn">
                                                     <i class="fab fa-google me-2"></i>
                                                     Sign up with Google
                                                 </button>
@@ -408,23 +413,167 @@
 
         </section>
 
-        <!-- Vue and application scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- Vue and Social Auth Libraries -->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <script src="assets/js/constants.js"></script>
-        <script src="assets/js/graphql/query.js"></script>
-        <script src="assets/js/graphql/mutation.js"></script>
-        <script src="assets/js/vue/commons.js"></script>
-        <script src="assets/js/vue/init.js"></script>
-        <script src="assets/js/vue/registration.js"></script>
-
-        <!-- Script JS -->
-        <script src="assets/js/vendor/bootstrap.min.js"></script>
-        <script src="assets/js/vendor/fontawesome.min.js"></script>
-        <script src="assets/js/vendor/jquery.min.js"></script>
-        <script src="assets/js/vendor/magnefic.min.js"></script>
-        <script src="assets/js/vendor/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/vue3-google-oauth2@1.0.6/dist/vue3-google-oauth2.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+
+        <!-- NEW VUE SCRIPT -->
+        <script>
+            // --- From constants.js ---
+            const AUTH_URL = 'https://auth.wanzami.tv/graphql';
+            const LEGAL_NAME = 'WANZAMI ENTERTAINMENT NIGERIA LIMITED';
+
+            // --- From graphql/mutation.js ---
+            const CreateUserMutation = `
+                mutation CreateUser($firstName: String!, $lastName: String!, $email: String!, $password: String!, $role: String!) {
+                    createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, role: $role) {
+                        id status firstName lastName email role
+                    }
+                }
+            `;
+            const FindUserByEmailQuery = `
+                query UserByEmail($email: String!) {
+                    userByEmail(email: $email) { id status email }
+                }
+            `;
+            
+            // --- From commons.js ---
+            const getFooterDate = (legalName) => `© ${new Date().getFullYear()} ${legalName}. All rights reserved.`;
+            const checkIfTokenIsSet = () => {
+                if(localStorage.getItem("token")) window.location.href = "index.html";
+            }
+
+            // --- Main Vue App Logic ---
+            document.addEventListener('DOMContentLoaded', function() {
+                const { createApp, ref, onMounted, watch, inject } = Vue;
+
+                const app = createApp({
+                    setup() {
+                        const firstName = ref('');
+                        const lastName = ref('');
+                        const email = ref('');
+                        const password = ref('');
+                        const passwordConfirm = ref('');
+                        const passwordVisibility = ref(false);
+                        const emailInUse = ref(false);
+                        const showWarning = ref(false);
+                        const message = ref('');
+                        const role = ref('NORMAL');
+                        const footerCopyright = getFooterDate(LEGAL_NAME);
+                        const gAuth = inject('gAuth');
+
+                        const togglePasswordVisibility = () => { passwordVisibility.value = !passwordVisibility.value; };
+
+                        const handleSocialLogin = async (token, provider) => {
+                            Swal.fire({ title: "Authenticating...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+                            const query = `
+                                mutation SocialLogin($token: String!, $provider: String!) {
+                                    socialLogin(token: $token, provider: $provider) {
+                                        token
+                                        user { id email firstName lastName }
+                                    }
+                                }`;
+                            try {
+                                const response = await fetch(AUTH_URL, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ query, variables: { token, provider } })
+                                });
+                                const result = await response.json();
+                                if (result.errors) throw new Error(result.errors[0].message);
+                                const { token: jwtToken } = result.data.socialLogin;
+                                localStorage.setItem('token', jwtToken);
+                                window.location.href = 'index.html';
+                            } catch (error) {
+                                Swal.fire({ icon: 'error', title: 'Authentication Failed', text: error.message, background: '#1a1a1a', color: '#ffffff', confirmButtonColor: '#E67539' });
+                            }
+                        };
+
+                        const handleGoogleLogin = () => {
+                            gAuth.getAuthCode()
+                                .then(token => handleSocialLogin(token, 'GOOGLE'))
+                                .catch(error => console.error("Google login error:", error));
+                        };
+
+                        const handleAppleLogin = async () => {
+                            try {
+                                const data = await AppleID.auth.signIn();
+                                if (data.authorization && data.authorization.id_token) {
+                                    handleSocialLogin(data.authorization.id_token, 'APPLE');
+                                } else { throw new Error("Apple Sign-In failed to return a token."); }
+                            } catch (error) { console.error("Apple Sign-In error:", error); }
+                        };
+
+                        const signup = async () => {
+                            if (password.value !== passwordConfirm.value) {
+                                showWarning.value = true;
+                                message.value = "Passwords do not match.";
+                                return;
+                            }
+                            if (emailInUse.value) {
+                                showWarning.value = true;
+                                message.value = "Email is already in use.";
+                                return;
+                            }
+                            Swal.fire({ title: "Creating Account...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+                            try {
+                                const response = await fetch(AUTH_URL, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ query: CreateUserMutation, variables: { firstName: firstName.value, lastName: lastName.value, email: email.value, password: password.value, role: role.value } })
+                                });
+                                const result = await response.json();
+                                if (result.errors) throw new Error(result.errors[0].message);
+                                Swal.fire({ title: "Account Created!", text: `Please check ${email.value} to activate your account.`, icon: "success" });
+                            } catch (err) {
+                                Swal.fire({ title: "Error", text: err.message, icon: "error" });
+                            }
+                        };
+
+                        watch(email, async (newEmail) => {
+                            emailInUse.value = false;
+                            showWarning.value = false;
+                            if (newEmail) {
+                                const response = await fetch(AUTH_URL, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ query: FindUserByEmailQuery, variables: { email: newEmail } })
+                                });
+                                const result = await response.json();
+                                if (result.data && result.data.userByEmail) {
+                                    emailInUse.value = true;
+                                    showWarning.value = true;
+                                    message.value = "Email already in use.";
+                                }
+                            }
+                        });
+
+                        onMounted(checkIfTokenIsSet);
+
+                        return {
+                            footerCopyright, firstName, lastName, email, password, passwordConfirm, passwordVisibility,
+                            showWarning, message, emailInUse,
+                            togglePasswordVisibility, signup, handleGoogleLogin, handleAppleLogin
+                        };
+                    }
+                });
+
+                app.use(GAuth, {
+                    clientId: '666787460270-16alrii27vrjehlrqv1c4lrcn8c06v5b.apps.googleusercontent.com', // IMPORTANT: Replace
+                    scope: 'email profile openid',
+                    prompt: 'consent'
+                });
+                app.mount('#appVue');
+            });
+        </script>
+
+        <!-- General UI Scripts  -->
+        <script src="assets/js/vendor/jquery.min.js"></script>
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+        <script src="assets/js/vendor/swiper-bundle.min.js"></script>
+        <script src="assets/js/vendor/magnific.min.js"></script>
         <script src="assets/js/main.js"></script>
     </body>
 
