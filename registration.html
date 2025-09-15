@@ -282,6 +282,20 @@
                                                         <span class="pt-0">Register Now</span>
                                                     </button>
                                                 </div>
+                                                <hr>
+                                                <div id="g_id_onload"
+                                                    data-client_id="666787460270-rdqd1027fudhsboimcdo3r9r1iphtmn7.apps.googleusercontent.com"
+                                                    data-callback="handleCredentialResponse">
+                                                </div>
+
+                                                <div class="g_id_signin"
+                                                    data-type="standard"
+                                                    data-shape="rectangular"
+                                                    data-theme="outline"
+                                                    data-text="sign_in_with"
+                                                    data-size="large"
+                                                    data-logo_alignment="left">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -386,6 +400,12 @@
 
         </section>
 
+        <!-- Add jwt-decode for convenience -->
+        <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+
+        <!--GSI scripts-->
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+
         <!-- Vue and application scripts -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -405,6 +425,82 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
         <script src="assets/js/main.js"></script>
+
+        <script>
+            function handleCredentialResponse(response) {
+                // The response.credential contains a JWT ID token
+                const data = jwt_decode(response.credential); // decode JWT
+                let email = data.email;
+                // console.log("User data:", data);
+                // console.log(response.credential);
+                // console.log(JSON.stringify(data, null, 2));
+
+                sendSocialLoginRequest("google", response.credential,email)
+            }
+
+            async function sendSocialLoginRequest(vendor, token, email) {
+                const query = `
+                mutation SocialLogin($vendor: String!, $token: String!){
+                    socialLogin(
+                        vendor: $vendor,
+                        token: $token
+                    )
+                }
+                `;
+
+                const variables = {
+                    vendor,
+                    token
+                };
+
+                try {
+                    const response = await fetch(AUTH_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any authorization headers if needed
+                    },
+                    body: JSON.stringify({
+                        query,
+                        variables
+                    })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.errors) {
+                        showWarning.value = true;
+                    } else {
+                        const token = result.data?.socialLogin;
+
+                        if(token === "Account not activated."){
+                            Swal.fire({
+                                title: "Account not activated",
+                                text: "Unable to login with Gmail.",
+                                icon: "warning"
+                            });
+
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('email');
+                            return;
+
+                        }
+
+                        if(token){
+                            localStorage.setItem("token", token);
+                            localStorage.setItem("email", email);
+
+                            checkIfTokenIsSet();
+                        }else{
+                            showWarning.value = true;
+                        } 
+                    }
+                } catch (err) {
+                    console.error('Network error:', err);
+                }
+            }
+        
+        </script>
     </body>
 
 </html>

@@ -101,6 +101,14 @@ mutation CreateWishList($video_id: Int!, $email: String!) {
 }
 `;
 
+const socialLoginMutation = `
+mutation SocialLogin($vendor: String!, $token: String!){
+    socialLogin(
+        vendor: $vendor,
+        token: $token
+    )
+}
+`;
 
 const CreateOrUpdateUserMetaMutation = `
 mutation CreateOrUpdateUserMeta(
