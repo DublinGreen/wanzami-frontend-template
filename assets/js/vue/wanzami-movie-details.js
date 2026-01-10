@@ -1,5 +1,5 @@
 
-const { createApp, ref, onMounted } = Vue;
+const { createApp, ref, computed, onMounted } = Vue;
 
 var trailer = "";
 var movieGeneratePresignedGetUrl = "";
@@ -232,6 +232,12 @@ createApp({
         const productionCrew = ref();
         const casts = ref();
         const prices = ref();
+        const price = computed(() => {
+            if (!prices.value || !Array.isArray(prices.value) || prices.value.length === 0) {
+                return null;
+            }
+            return prices.value[0]; // first price only
+        });
         const videoPayments = ref();
         const canPay = ref(true);
         const myPlayList = ref();
@@ -394,6 +400,7 @@ createApp({
                 prices.value = data.data.videoPriceByVideoId;
                 
                 let pricesObj = prices.value;
+
                 if(pricesObj){
                     pricesObj.forEach(function(item) {
                         if(item.status == 1){
@@ -503,9 +510,7 @@ createApp({
             // console.log("Amount:", price.price.price);
             // console.log("Country:", ca.value);
 
-            if(price.price.currency == 'NGN' && price.price.price == 0 && ca.value == 'Nigeria'){
-                return true;
-            }else if(price.price.currency === 'USD' && price.price.price === 0){
+            if(price.price.price === '0'){
                 return true;
             }
 
@@ -531,6 +536,7 @@ createApp({
             country,
             appName,
             prices,
+            price,
             videoPayments,
             ia,
             canPay,
