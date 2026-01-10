@@ -498,6 +498,20 @@ createApp({
             }
         };
 
+        const isFreePlayable = (price) => {
+            // console.log("Currency:", price.price.currency);
+            // console.log("Amount:", price.price.price);
+            // console.log("Country:", ca.value);
+
+            if(price.price.currency == 'NGN' && price.price.price == 0 && ca.value == 'Nigeria'){
+                return true;
+            }else if(price.price.currency === 'USD' && price.price.price === 0){
+                return true;
+            }
+
+            return false;
+        };
+
         // Fetch data when component mounts
         onMounted(() => {
             getCountry();
@@ -528,6 +542,7 @@ createApp({
             newestRealeasesFilms,
             canAddToPlayList,
             mobileAppAlert,
+            isFreePlayable,
         };
     }
 }).mount('#appVue');
